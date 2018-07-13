@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+	//メッセージマネージャ
+	[SerializeField]private MessageManager MessageMan;
 	//マス移動にかかる時間
 	[SerializeField]private float MoveDuration;
 	//移動前の位置
@@ -20,15 +22,19 @@ public class Movement : MonoBehaviour
 		if( IsMoving != true ){
 			if( Input.GetKeyDown( KeyCode.UpArrow ) ){
 				MoveStart( Vector3.forward );
+				MessageMan.AddMessage("上に動きました");
 			}
 			else if( Input.GetKeyDown( KeyCode.DownArrow ) ){
 				MoveStart( Vector3.back );
+				MessageMan.AddMessage("下に動きました");
 			}
 			else if( Input.GetKeyDown( KeyCode.LeftArrow ) ){
 				MoveStart( Vector3.left );
+				MessageMan.AddMessage("左に動きました");
 			}
 			else if( Input.GetKeyDown( KeyCode.RightArrow ) ){
 				MoveStart( Vector3.right );
+				MessageMan.AddMessage("右に動きました");
 			}
 			else{
 				//Do Nothing
