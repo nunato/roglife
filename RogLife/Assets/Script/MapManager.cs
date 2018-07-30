@@ -6,6 +6,10 @@ public class MapManager : MonoBehaviour
 {
 	[SerializeField]
 	private TMXLoader _TMXLoader;
+	[SerializeField]
+	private Material _WallMaterial;
+	[SerializeField]
+	private Material _FloorMaterial;
 
 	void Start()
 	{
@@ -25,11 +29,13 @@ public class MapManager : MonoBehaviour
 				if( _TMXLoader.GetLayerValue( w, h ) == 2 ){
 					GameObject cube = GameObject.CreatePrimitive( PrimitiveType.Cube );
 					cube.transform.position = new Vector3( w, 0, h );
+					cube.GetComponent<Renderer>().material = _WallMaterial;
 				}
 				//床の生成
 				else if( _TMXLoader.GetLayerValue( w, h ) == 1 ){
 					GameObject cube = GameObject.CreatePrimitive( PrimitiveType.Cube );
 					cube.transform.position = new Vector3( w, -1, h );
+					cube.GetComponent<Renderer>().material = _FloorMaterial;
 				}
 			}
 		}
