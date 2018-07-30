@@ -24,12 +24,12 @@ public class MapManager : MonoBehaviour
 				//壁の生成
 				if( _TMXLoader.GetLayerValue( w, h ) == 2 ){
 					GameObject cube = GameObject.CreatePrimitive( PrimitiveType.Cube );
-					cube.transform.position = new Vector3( w, 1, h );
+					cube.transform.position = new Vector3( w, 0, h );
 				}
 				//床の生成
 				else if( _TMXLoader.GetLayerValue( w, h ) == 1 ){
 					GameObject cube = GameObject.CreatePrimitive( PrimitiveType.Cube );
-					cube.transform.position = new Vector3( w, 0, h );
+					cube.transform.position = new Vector3( w, -1, h );
 				}
 			}
 		}
