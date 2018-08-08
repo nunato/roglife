@@ -16,23 +16,33 @@ public class Movement : MonoBehaviour
 	private float ElapsedTime = 0;
 	//移動中かの判定
 	private bool IsMoving;
+	private Vector3 LockAt = Vector3.zero;
+
+	public Vector3 PlayerLockAt
+	{
+		get{ return LockAt; }
+	}
 
 	public void Move()
 	{
 		if( IsMoving != true ){
 			if( Input.GetKeyDown( KeyCode.UpArrow ) ){
+				LockAt = Vector3.forward;
 				MoveStart( Vector3.forward );
 				MessageMan.AddMessage("上に動きました");
 			}
 			else if( Input.GetKeyDown( KeyCode.DownArrow ) ){
+				LockAt = Vector3.back;
 				MoveStart( Vector3.back );
 				MessageMan.AddMessage("下に動きました");
 			}
 			else if( Input.GetKeyDown( KeyCode.LeftArrow ) ){
+				LockAt = Vector3.left;
 				MoveStart( Vector3.left );
 				MessageMan.AddMessage("左に動きました");
 			}
 			else if( Input.GetKeyDown( KeyCode.RightArrow ) ){
+				LockAt = Vector3.right;
 				MoveStart( Vector3.right );
 				MessageMan.AddMessage("右に動きました");
 			}

@@ -21,8 +21,8 @@ public class MapManager : MonoBehaviour
 	//MapDataから壁を読み込みキューブを生成する
 	private void CreateMapWall()
 	{
-		int height = _TMXLoader.GetLayerHeight();
-		int Width = _TMXLoader.GetLayerWidth();
+		int height = _TMXLoader.LayerHeight;
+		int Width = _TMXLoader.LayerWidth;
 		for( int h = 0; h < height; h++ ){
 			for( int w = 0; w < Width; w++ ){
 				//壁の生成
