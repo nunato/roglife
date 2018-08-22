@@ -8,7 +8,7 @@ public class SaveDataManager : MonoBehaviour
 	[SerializeField]
 	private SaveData _SaveData;
 	[SerializeField]
-	private Transform _Player;
+	private GameObject _Player;
 	[SerializeField]
 	private Movement _Movement;
 	[SerializeField]
@@ -20,7 +20,7 @@ public class SaveDataManager : MonoBehaviour
 	{
 		if( Input.GetKeyDown( KeyCode.S ) ){
 			_SaveData = new SaveData();
-			_SaveData._PlayerPos = _Player.position;
+			_SaveData._PlayerPos = _Player.transform.position;
 			_SaveData._LockAt = _Movement.PlayerLockAt;
 			_SaveData._width = _Map.LayerWidth;
 			_SaveData._height = _Map.LayerHeight;
@@ -38,8 +38,14 @@ public class SaveDataManager : MonoBehaviour
 			FileInfo info = new FileInfo( Application.dataPath + "/" + SAVE_FILE_PATH );
 			StreamReader reader = new StreamReader( info.OpenRead() );
 			string json = reader.ReadToEnd();
+			reader.Close();
 			SaveData data = JsonUtility.FromJson<SaveData>( json );
 			data.Dump();
+			_Player.transform.position = data._PlayerPos;
+			_Movement.PlayerLockAt = data._LockAt;
+			_Map.LayerWidth = data._width;
+			_Map.LayerHeight = data._height;
+			_Map.LayerValue = data._vals;
 		}
 	}
 }

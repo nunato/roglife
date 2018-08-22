@@ -437,7 +437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8a5ad95a6f299641ab889bf3adacca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Player: {fileID: 1785343560}
+  _Player: {fileID: 1785343559}
   _Movement: {fileID: 1785343562}
   _Map: {fileID: 1111701144}
 --- !u!4 &719316805

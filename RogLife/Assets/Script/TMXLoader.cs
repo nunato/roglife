@@ -10,16 +10,19 @@ public class TMXLoader : MonoBehaviour
 	public int LayerWidth
 	{
 		get{ return _layer.Width; }
+		set{ _layer.Width = value; }
 	}
 
 	public int LayerHeight
 	{
 		get{ return _layer.Height; }
+		set{ _layer.Height = value; }
 	}
 
 	public int[] LayerValue
 	{
 		get{ return _layer.Vals; }
+		set{ _layer.Vals = value; }
 	}
 
 	public int GetLayerValue( int w, int h )

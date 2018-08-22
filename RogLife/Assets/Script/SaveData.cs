@@ -9,9 +9,11 @@ public struct SaveData
 	/* プレイヤーの向き */
 	public Vector3 _LockAt;
 	/* マップ情報 */
+	/* 横サイズ */
 	public int _width;
+	/* 縦サイズ */
 	public int _height;
-
+	/* マップデータ */
 	public int[] _vals;
 
 	public void Dump()

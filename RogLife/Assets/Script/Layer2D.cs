@@ -12,16 +12,19 @@ public class Layer2D
 	public int Width
 	{
 		get{ return _width;}
+		set{ _width = value;}
 	}
 
 	public int Height
 	{
 		get{ return _height;}
+		set{ _height = value;}
 	}
 
 	public int[] Vals
 	{
 		get{ return _vals; }
+		set{ _vals = value;}
 	}
 
 	public void Create( int width, int height )
