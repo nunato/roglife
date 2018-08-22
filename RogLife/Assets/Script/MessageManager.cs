@@ -18,6 +18,13 @@ public class MessageManager : MonoBehaviour
 		TextQueue.Enqueue(message);
 	}
 
+	void Start()
+	{
+		for( int i = 0; i < MessageTextList.Length; i++ ){
+			MessageTextList[i].text = "";
+		}
+	}
+
 	void Update()
 	{
 		int i = 0;
