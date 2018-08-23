@@ -12,7 +12,7 @@ public class SaveDataManager : MonoBehaviour
 	[SerializeField]
 	private Movement _Movement;
 	[SerializeField]
-	private TMXLoader _Map;
+	private MapManager _MapData;
 
 	private const string SAVE_FILE_PATH = "SaveData.txt";
 
@@ -22,9 +22,9 @@ public class SaveDataManager : MonoBehaviour
 			_SaveData = new SaveData();
 			_SaveData._PlayerPos = _Player.transform.position;
 			_SaveData._LockAt = _Movement.PlayerLockAt;
-			_SaveData._width = _Map.LayerWidth;
-			_SaveData._height = _Map.LayerHeight;
-			_SaveData._vals = _Map.LayerValue;
+			_SaveData._width = _MapData.Width;
+			_SaveData._height = _MapData.Height;
+			_SaveData._vals = _MapData.Value;
 
 			string json = JsonUtility.ToJson( _SaveData );
 			string path = Application.dataPath + "/" + SAVE_FILE_PATH;
@@ -43,9 +43,9 @@ public class SaveDataManager : MonoBehaviour
 			data.Dump();
 			_Player.transform.position = data._PlayerPos;
 			_Movement.PlayerLockAt = data._LockAt;
-			_Map.LayerWidth = data._width;
-			_Map.LayerHeight = data._height;
-			_Map.LayerValue = data._vals;
+			_MapData.Width = data._width;
+			_MapData.Height = data._height;
+			_MapData.Value = data._vals;
 		}
 	}
 }

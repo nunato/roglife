@@ -5,35 +5,10 @@ using System.Xml;
 
 public class TMXLoader : MonoBehaviour
 {
-	private Layer2D _layer;
-
-	public int LayerWidth
-	{
-		get{ return _layer.Width; }
-		set{ _layer.Width = value; }
-	}
-
-	public int LayerHeight
-	{
-		get{ return _layer.Height; }
-		set{ _layer.Height = value; }
-	}
-
-	public int[] LayerValue
-	{
-		get{ return _layer.Vals; }
-		set{ _layer.Vals = value; }
-	}
-
-	public int GetLayerValue( int w, int h )
-	{
-		return _layer.Get( w, h );
-	}
-
-	public void CreateMapData()
+	public Layer2D CreateMapData()
 	{
 		//レイヤー生成
-		_layer = new Layer2D();
+		Layer2D layer = new Layer2D();
 		//リソースを取得
 		TextAsset tmx = Resources.Load("untitled") as TextAsset;
 
@@ -54,7 +29,7 @@ public class TMXLoader : MonoBehaviour
 				//dataを格納する配列の初期化
 				int w = int.Parse( attrs.GetNamedItem("width").Value );
 				int h = int.Parse( attrs.GetNamedItem("height").Value );
-				_layer.Create( w, h );
+				layer.Create( w, h );
 
 				//dataノードの取得
 				XmlNode node = child.FirstChild;
@@ -73,12 +48,13 @@ public class TMXLoader : MonoBehaviour
 							continue;
 						}
 						
-						_layer.Set( x, y, v );
+						layer.Set( x, y, v );
 						x++;
 					}
 					y++;
 				}
 			}
 		}
+		return layer;
 	}
 }

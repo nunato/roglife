@@ -439,7 +439,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Player: {fileID: 1785343559}
   _Movement: {fileID: 1785343562}
-  _Map: {fileID: 1111701144}
+  _MapData: {fileID: 1111701142}
 --- !u!4 &719316805
 Transform:
   m_ObjectHideFlags: 0

@@ -21,9 +21,9 @@ public class Layer2D
 		set{ _height = value;}
 	}
 
-	public int[] Vals
+	public int[] Value
 	{
-		get{ return _vals; }
+		get{ return _vals;}
 		set{ _vals = value;}
 	}
 
