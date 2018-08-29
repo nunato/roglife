@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class MessageManager : MonoBehaviour
 {
+	[SerializeField]
+	private GameObject _Canvase;
 	//メッセージテキスト
 	[SerializeField]private Text[] MessageTextList;
 	//テキストキュー
@@ -20,6 +22,7 @@ public class MessageManager : MonoBehaviour
 
 	void Start()
 	{
+		_Canvase.SetActive( true );
 		for( int i = 0; i < MessageTextList.Length; i++ ){
 			MessageTextList[i].text = "";
 		}
