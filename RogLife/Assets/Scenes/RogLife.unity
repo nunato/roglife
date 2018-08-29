@@ -1072,3 +1072,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MessageMan: {fileID: 1069620800}
   MoveDuration: 0.2
+  _MapMng: {fileID: 1111701142}
