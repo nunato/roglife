@@ -10,7 +10,7 @@ public class SaveDataManager : MonoBehaviour
 	[SerializeField]
 	private GameObject _Player;
 	[SerializeField]
-	private Movement _Movement;
+	private Player _Move;
 	[SerializeField]
 	private MapManager _MapData;
 
@@ -21,7 +21,7 @@ public class SaveDataManager : MonoBehaviour
 		if( Input.GetKeyDown( KeyCode.S ) ){
 			_SaveData = new SaveData();
 			_SaveData._PlayerPos = _Player.transform.position;
-			_SaveData._LockAt = _Movement.PlayerLockAt;
+			_SaveData._LockAt = _Move.LockAt;
 			_SaveData._width = _MapData.Width;
 			_SaveData._height = _MapData.Height;
 			_SaveData._vals = _MapData.Value;
@@ -42,7 +42,7 @@ public class SaveDataManager : MonoBehaviour
 			SaveData data = JsonUtility.FromJson<SaveData>( json );
 			data.Dump();
 			_Player.transform.position = data._PlayerPos;
-			_Movement.PlayerLockAt = data._LockAt;
+			_Move.LockAt = data._LockAt;
 			_MapData.Width = data._width;
 			_MapData.Height = data._height;
 			_MapData.Value = data._vals;
