@@ -33,28 +33,32 @@ public class Player : MonoBehaviour
 		if( Input.GetKeyDown( KeyCode.UpArrow ) ){
 			LockAt = Vector3.forward;
 			if( _MapMng.CanMove( transform.position, eDir.UP )){
-				PlayerMove.Move( Vector3.forward );
+				PlayerMove.Move( LockAt );
+				transform.rotation = Quaternion.Euler( 0, 0, 0 );
 				MessageMan.AddMessage("上に動きました");
 			}
 		}
 		else if( Input.GetKeyDown( KeyCode.DownArrow ) ){
 			LockAt = Vector3.back;
 			if( _MapMng.CanMove( transform.position, eDir.DOWN )){
-				PlayerMove.Move( Vector3.back );
+				PlayerMove.Move( LockAt );
+				transform.rotation = Quaternion.Euler( 0, 180, 0 );
 				MessageMan.AddMessage("下に動きました");
 			}
 		}
 		else if( Input.GetKeyDown( KeyCode.LeftArrow ) ){
 			LockAt = Vector3.left;
 			if( _MapMng.CanMove( transform.position, eDir.LEFT )){
-				PlayerMove.Move( Vector3.left );
+				PlayerMove.Move( LockAt );
+				transform.rotation = Quaternion.Euler( 0, 270, 0 );
 				MessageMan.AddMessage("左に動きました");
 			}
 		}
 		else if( Input.GetKeyDown( KeyCode.RightArrow ) ){
 			LockAt = Vector3.right;
 			if( _MapMng.CanMove( transform.position, eDir.RIGHT )){
-				PlayerMove.Move( Vector3.right );
+				PlayerMove.Move( LockAt );
+				transform.rotation = Quaternion.Euler( 0, 90, 0 );
 				MessageMan.AddMessage("右に動きました");
 			}
 		}
