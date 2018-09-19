@@ -725,6 +725,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ddfecef886dacc4da8bbd202ee77147, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StartPosition: {fileID: 1033049137}
+  PlayerMove: {fileID: 895325771}
+  _MapMng: {fileID: 1111701142}
+--- !u!114 &895325771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 895325769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 753242bc676de6b44ada1ddcecda8f0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoveDuration: 0.2
 --- !u!1 &916013719
 GameObject:
   m_ObjectHideFlags: 0
