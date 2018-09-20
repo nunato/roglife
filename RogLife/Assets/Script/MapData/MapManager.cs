@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class MapManager : MonoBehaviour
 {
-	enum MapObj{
-		FLOOR = 1,
-		WALL,
-	}
-
 	[SerializeField]
 	private TMXLoader _TMXLoader;
 	[SerializeField]
@@ -59,12 +54,41 @@ public class MapManager : MonoBehaviour
 		}
 		int Panel = _layer.Get( x, y );
 
-		if( Panel == (int)MapObj.WALL ){
+		if( Panel != (int)MapElement.FLOOR ){
 			return false;
 		}
 		else{
 			return true;
 		}
+	}
+
+	//マップデータにデータを追加する
+	public void SetData( int x, int y , MapElement element )
+	{
+		_layer.Set( x, y, (int)element );
+	}
+
+	// グリッド座標をワールド座標に変換
+	public Vector3 ToWorldPosition( int x, int y )
+	{
+		Vector3 pos = new Vector3( x, 0, y );
+		return pos;
+	}
+
+	// ワールド座標(X)をグリッド座標(X)に変換
+	public int ToGridX( Vector3 pos )
+	{
+		int x;
+		x = (int)pos.x;
+		return x;
+	}
+	// ワールド座標(Z)をグリッド座標(Y)に変換
+	public int ToGridY( Vector3 pos )
+	{
+		int y;
+		//ワールド座標はzがグリッドのyなので注意
+		y = (int)pos.z;
+		return y;
 	}
 
 	void Start()
@@ -83,13 +107,13 @@ public class MapManager : MonoBehaviour
 			for( int w = 0; w < Width; w++ ){
 				//壁の生成
 				int Panel = _layer.Get( w, h );
-				if( Panel == (int)MapObj.WALL ){
+				if( Panel == (int)MapElement.WALL ){
 					GameObject cube = GameObject.CreatePrimitive( PrimitiveType.Cube );
 					cube.transform.position = new Vector3( w, 0, h );
 					cube.GetComponent<Renderer>().material = _WallMaterial;
 				}
 				//床の生成
-				else if( Panel == (int)MapObj.FLOOR ){
+				else if( Panel == (int)MapElement.FLOOR ){
 					GameObject cube = GameObject.CreatePrimitive( PrimitiveType.Cube );
 					cube.transform.position = new Vector3( w, -1, h );
 					cube.GetComponent<Renderer>().material = _FloorMaterial;
