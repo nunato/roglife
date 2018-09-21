@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
 			LockAt = Vector3.forward;
 			transform.rotation = Quaternion.Euler( 0, 0, 0 );
 			if( _MapMng.CanMove( transform.position, eDir.UP )){
-				PlayerMove.Move( LockAt );
+				PlayerMove.Move( MapElement.PLAYER, LockAt );
 				MessageMan.AddMessage("上に動きました");
 			}
 		}
@@ -49,7 +49,7 @@ public class Player : MonoBehaviour
 			LockAt = Vector3.back;
 			transform.rotation = Quaternion.Euler( 0, 180, 0 );
 			if( _MapMng.CanMove( transform.position, eDir.DOWN )){
-				PlayerMove.Move( LockAt );
+				PlayerMove.Move( MapElement.PLAYER, LockAt );
 				MessageMan.AddMessage("下に動きました");
 			}
 		}
@@ -57,7 +57,7 @@ public class Player : MonoBehaviour
 			LockAt = Vector3.left;
 			transform.rotation = Quaternion.Euler( 0, 270, 0 );
 			if( _MapMng.CanMove( transform.position, eDir.LEFT )){
-				PlayerMove.Move( LockAt );
+				PlayerMove.Move( MapElement.PLAYER, LockAt );
 				MessageMan.AddMessage("左に動きました");
 			}
 		}
@@ -65,7 +65,7 @@ public class Player : MonoBehaviour
 			LockAt = Vector3.right;
 			transform.rotation = Quaternion.Euler( 0, 90, 0 );
 			if( _MapMng.CanMove( transform.position, eDir.RIGHT )){
-				PlayerMove.Move( LockAt );
+				PlayerMove.Move( MapElement.PLAYER, LockAt );
 				MessageMan.AddMessage("右に動きました");
 			}
 		}

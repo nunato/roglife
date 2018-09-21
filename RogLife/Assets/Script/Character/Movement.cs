@@ -14,20 +14,30 @@ public class Movement : MonoBehaviour
 	private float ElapsedTime = 0;
 	//移動中かの判定
 	private bool IsMoving;
+	//移動後のグリッド座標更新
+	[SerializeField]
+	private MapManager _MapMng;
 
-	public void Move( Vector3 moveAt )
+	public void Move( MapElement element, Vector3 moveAt )
 	{
 		if( IsMoving != true ){
-			MoveStart( moveAt );
+			MoveStart( element, moveAt );
 		}
 	}
 
-	private void MoveStart( Vector3 targetPos )
+	private void MoveStart( MapElement element, Vector3 targetPos )
 	{
 		StartPos = transform.position;
 		EndPos = transform.position + targetPos;
 		ElapsedTime = 0;
 		IsMoving = true;
+		//グリッド座標の更新
+		int x = _MapMng.ToGridX( StartPos );
+		int y = _MapMng.ToGridY( StartPos );
+		_MapMng.DeleteData( x, y );
+		x = _MapMng.ToGridX( EndPos );
+		y = _MapMng.ToGridY( EndPos );
+		_MapMng.SetData( x, y, element );
 	}
 
 	void Start()

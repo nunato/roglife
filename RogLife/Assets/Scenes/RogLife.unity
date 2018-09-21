@@ -740,6 +740,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveDuration: 0.2
+  _MapMng: {fileID: 1111701142}
 --- !u!1 &916013719
 GameObject:
   m_ObjectHideFlags: 0
@@ -1165,3 +1166,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveDuration: 0.2
+  _MapMng: {fileID: 1111701142}

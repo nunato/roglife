@@ -63,9 +63,14 @@ public class MapManager : MonoBehaviour
 	}
 
 	//マップデータにデータを追加する
-	public void SetData( int x, int y , MapElement element )
+	public void SetData( int x, int y, MapElement element )
 	{
 		_layer.Set( x, y, (int)element );
+	}
+
+	public void DeleteData( int x, int y )
+	{
+		_layer.Set( x, y, (int)MapElement.FLOOR );
 	}
 
 	// グリッド座標をワールド座標に変換
@@ -91,7 +96,7 @@ public class MapManager : MonoBehaviour
 		return y;
 	}
 
-	void Start()
+	void Awake()
 	{
 		_layer = _TMXLoader.CreateMapData();
 
