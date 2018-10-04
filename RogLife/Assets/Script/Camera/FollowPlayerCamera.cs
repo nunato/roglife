@@ -4,19 +4,25 @@ using UnityEngine;
 
 public class FollowPlayerCamera : MonoBehaviour
 {
-	[SerializeField]
-	private GameObject _target;
+	private GameObject _Target;
 
-	private Vector3 _margin;
+	private Vector3 _Margin = Vector3.zero;
 
-	void Start()
+	public void SetUp( GameObject target )
 	{
-		_margin = _target.transform.position;
+		if( target == null ){
+			Debug.Log( "ERROR FollowPlayerCamera SetUp" );
+		}
+		_Target = target;
+		_Margin = _Target.transform.position;
 	}
 
-	void Update()
+	public void Move()
 	{
-		transform.position += _target.transform.position - _margin;
-		_margin = _target.transform.position;
+		if( _Target == null ){
+			Debug.Log( "ERROR FollowPlayerCamera Move" );
+		}
+		transform.position += _Target.transform.position - _Margin;
+		_Margin = _Target.transform.position;
 	}
 }

@@ -5,7 +5,8 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
 	//マス移動にかかる時間
-	[SerializeField]private float MoveDuration;
+	[SerializeField]
+	private float MoveDuration;
 	//移動前の位置
 	private Vector3 StartPos;
 	//移動後の位置
@@ -15,8 +16,7 @@ public class Movement : MonoBehaviour
 	//移動中かの判定
 	private bool IsMoving;
 	//移動後のグリッド座標更新
-	[SerializeField]
-	private MapManager _MapMng;
+	private MapManager _MapManager;
 
 	public void Move( MapElement element, Vector3 moveAt )
 	{
@@ -32,21 +32,22 @@ public class Movement : MonoBehaviour
 		ElapsedTime = 0;
 		IsMoving = true;
 		//グリッド座標の更新
-		int x = _MapMng.ToGridX( StartPos );
-		int y = _MapMng.ToGridY( StartPos );
-		_MapMng.DeleteData( x, y );
-		x = _MapMng.ToGridX( EndPos );
-		y = _MapMng.ToGridY( EndPos );
-		_MapMng.SetData( x, y, element );
+		int x = _MapManager.ToGridX( StartPos );
+		int y = _MapManager.ToGridY( StartPos );
+		_MapManager.DeleteData( x, y );
+		x = _MapManager.ToGridX( EndPos );
+		y = _MapManager.ToGridY( EndPos );
+		_MapManager.SetData( x, y, element );
 	}
 
 	void Start()
 	{
+		_MapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
 		EndPos = transform.position;
 		IsMoving = false;
 	}
 
-	void Update()
+	void FixedUpdate()
 	{
 		if( IsMoving == true ){
 			if( transform.position != EndPos ){

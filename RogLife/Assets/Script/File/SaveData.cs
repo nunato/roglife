@@ -6,8 +6,6 @@ public struct SaveData
 {
 	/* プレイヤーの位置情報 */
 	public Vector3 _PlayerPos;
-	/* プレイヤーの向き */
-	public Vector3 _LockAt;
 	/* マップ情報 */
 	/* 横サイズ */
 	public int _width;
@@ -19,7 +17,6 @@ public struct SaveData
 	public void Dump()
 	{
 		Debug.Log( _PlayerPos );
-		Debug.Log( _LockAt );
 		Debug.Log( _width );
 		Debug.Log( _height );
 		Debug.Log( _vals );
