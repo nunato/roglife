@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 	//移動クラス
-	private Movement _Move;
+	private MovingAnimation _Move;
 	//移動可能か判定
 	private MapManager _MapManager;
 	//メッセージマネージャ
@@ -24,37 +24,39 @@ public class Player : MonoBehaviour
 		//マップデータからワールド座標を決める
 		transform.position = _MapManager.ToWorldPosition( x, y );
 
-		_Move = GetComponent<Movement>();
+		_Move = GetComponent<MovingAnimation>();
+		_Move.SetUp();
+
 		_MessageMan = GameObject.Find("MessageManager").GetComponent<MessageManager>();
 	}
 
-	void Update()
+	public void Move()
 	{
 		if( Input.GetKeyDown( KeyCode.UpArrow ) ){
 			transform.rotation = Quaternion.Euler( 0, 0, 0 );
 			if( _MapManager.CanMove( transform.position, eDir.UP )){
-				_Move.Move( MapElement.PLAYER, Vector3.forward );
+				_Move.StartAnime( MapElement.PLAYER, Vector3.forward );
 				_MessageMan.AddMessage("上に動きました");
 			}
 		}
 		else if( Input.GetKeyDown( KeyCode.DownArrow ) ){
 			transform.rotation = Quaternion.Euler( 0, 180, 0 );
 			if( _MapManager.CanMove( transform.position, eDir.DOWN )){
-				_Move.Move( MapElement.PLAYER, Vector3.back );
+				_Move.StartAnime( MapElement.PLAYER, Vector3.back );
 				_MessageMan.AddMessage("下に動きました");
 			}
 		}
 		else if( Input.GetKeyDown( KeyCode.LeftArrow ) ){
 			transform.rotation = Quaternion.Euler( 0, 270, 0 );
 			if( _MapManager.CanMove( transform.position, eDir.LEFT )){
-				_Move.Move( MapElement.PLAYER, Vector3.left );
+				_Move.StartAnime( MapElement.PLAYER, Vector3.left );
 				_MessageMan.AddMessage("左に動きました");
 			}
 		}
 		else if( Input.GetKeyDown( KeyCode.RightArrow ) ){
 			transform.rotation = Quaternion.Euler( 0, 90, 0 );
 			if( _MapManager.CanMove( transform.position, eDir.RIGHT )){
-				_Move.Move( MapElement.PLAYER, Vector3.right );
+				_Move.StartAnime( MapElement.PLAYER, Vector3.right );
 				_MessageMan.AddMessage("右に動きました");
 			}
 		}

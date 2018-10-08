@@ -16,7 +16,9 @@ public class GameManager : MonoBehaviour
 	private Transform[] _EnemySpownPoints;
 
 	private GameObject _PlayerInstance;
+	private Player _Player;
 	private GameObject[] _EnemyInstances;
+	private Enemy[] _Enemys;
 
 	void Start()
 	{
@@ -36,28 +38,39 @@ public class GameManager : MonoBehaviour
 		_PlayerInstance = Instantiate( _PlayerPrefab,
 										_PlayerSpownPoint.position,
 										_PlayerSpownPoint.rotation ) as GameObject;
-		Player player = _PlayerInstance.GetComponent<Player>();
-		if( player == null ){
+		_Player = _PlayerInstance.GetComponent<Player>();
+		if( _Player == null ){
 			Debug.Log( "ERROR player" );
 		}
-		player.SetUp();
+		_Player.SetUp();
 
 		_EnemyInstances = new GameObject[_EnemyPrefabs.Length];
+		_Enemys = new Enemy[_EnemyPrefabs.Length];
 
 		for( int i = 0; i < _EnemyPrefabs.Length; i++ ){
 			_EnemyInstances[i] = Instantiate(  _EnemyPrefabs[i],
 												_EnemySpownPoints[i].position,
 												_EnemySpownPoints[i].rotation ) as GameObject;
-			Enemy enemy = _EnemyInstances[i].GetComponent<Enemy>();
-			if( enemy == null ){
+			_Enemys[i] = _EnemyInstances[i].GetComponent<Enemy>();
+			if( _Enemys[i] == null ){
 				Debug.Log( "ERROR enemy" );
 			}
-			enemy.SetUp();
+			_Enemys[i].SetUp();
 		}
 	}
 
 	private void SetUpCamera()
 	{
 		_Camera.SetUp( _PlayerInstance );
+	}
+
+	void Update()
+	{
+		_Player.Move();
+		_Camera.Move();
+
+		for( int i = 0; i < _EnemyPrefabs.Length; i++ ){
+			_Enemys[i].Move();
+		}
 	}
 }

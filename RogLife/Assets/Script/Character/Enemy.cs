@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 	//移動クラス
-	private Movement _Move;
+	private MovingAnimation _Move;
 	//移動可能か判定
 	private MapManager _MapManager;
 
@@ -22,32 +22,33 @@ public class Enemy : MonoBehaviour
 		//マップデータからワールド座標を決める
 		transform.position = _MapManager.ToWorldPosition( x, y );
 
-		_Move = GetComponent<Movement>();
+		_Move = GetComponent<MovingAnimation>();
+		_Move.SetUp();
 	}
 
-	void Update()
+	public void Move()
 	{
 		if( Input.GetKeyDown( KeyCode.UpArrow ) ){
 			if( _MapManager.CanMove( transform.position, eDir.UP )){
-				_Move.Move( MapElement.ENEMY, Vector3.forward );
+				_Move.StartAnime( MapElement.ENEMY, Vector3.forward );
 				transform.rotation = Quaternion.Euler( 0, 0, 0 );
 			}
 		}
 		else if( Input.GetKeyDown( KeyCode.DownArrow ) ){
 			if( _MapManager.CanMove( transform.position, eDir.DOWN )){
-				_Move.Move( MapElement.ENEMY, Vector3.back );
+				_Move.StartAnime( MapElement.ENEMY, Vector3.back );
 				transform.rotation = Quaternion.Euler( 0, 180, 0 );
 			}
 		}
 		else if( Input.GetKeyDown( KeyCode.LeftArrow ) ){
 			if( _MapManager.CanMove( transform.position, eDir.LEFT )){
-				_Move.Move( MapElement.ENEMY, Vector3.left );
+				_Move.StartAnime( MapElement.ENEMY, Vector3.left );
 				transform.rotation = Quaternion.Euler( 0, 270, 0 );
 			}
 		}
 		else if( Input.GetKeyDown( KeyCode.RightArrow ) ){
 			if( _MapManager.CanMove( transform.position, eDir.RIGHT )){
-				_Move.Move( MapElement.ENEMY, Vector3.right );
+				_Move.StartAnime( MapElement.ENEMY, Vector3.right );
 				transform.rotation = Quaternion.Euler( 0, 90, 0 );
 			}
 		}

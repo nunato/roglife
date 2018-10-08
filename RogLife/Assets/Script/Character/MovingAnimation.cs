@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement : MonoBehaviour
+public class MovingAnimation : MonoBehaviour
 {
 	//マス移動にかかる時間
 	[SerializeField]
@@ -18,33 +18,28 @@ public class Movement : MonoBehaviour
 	//移動後のグリッド座標更新
 	private MapManager _MapManager;
 
-	public void Move( MapElement element, Vector3 moveAt )
-	{
-		if( IsMoving != true ){
-			MoveStart( element, moveAt );
-		}
-	}
-
-	private void MoveStart( MapElement element, Vector3 targetPos )
-	{
-		StartPos = transform.position;
-		EndPos = transform.position + targetPos;
-		ElapsedTime = 0;
-		IsMoving = true;
-		//グリッド座標の更新
-		int x = _MapManager.ToGridX( StartPos );
-		int y = _MapManager.ToGridY( StartPos );
-		_MapManager.DeleteData( x, y );
-		x = _MapManager.ToGridX( EndPos );
-		y = _MapManager.ToGridY( EndPos );
-		_MapManager.SetData( x, y, element );
-	}
-
-	void Start()
+	public void SetUp()
 	{
 		_MapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
 		EndPos = transform.position;
 		IsMoving = false;
+	}
+
+	public void StartAnime( MapElement element, Vector3 targetPos )
+	{
+		if( IsMoving != true ){
+			StartPos = transform.position;
+			EndPos = transform.position + targetPos;
+			ElapsedTime = 0;
+			IsMoving = true;
+			//グリッド座標の更新
+			int x = _MapManager.ToGridX( StartPos );
+			int y = _MapManager.ToGridY( StartPos );
+			_MapManager.DeleteData( x, y );
+			x = _MapManager.ToGridX( EndPos );
+			y = _MapManager.ToGridY( EndPos );
+			_MapManager.SetData( x, y, element );
+		}
 	}
 
 	void FixedUpdate()

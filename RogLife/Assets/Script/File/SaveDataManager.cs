@@ -10,8 +10,6 @@ public class SaveDataManager : MonoBehaviour
 	[SerializeField]
 	private GameObject _Player;
 	[SerializeField]
-	private Player _Move;
-	[SerializeField]
 	private MapManager _MapData;
 
 	private const string SAVE_FILE_PATH = "SaveData.txt";
