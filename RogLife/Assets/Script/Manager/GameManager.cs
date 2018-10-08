@@ -68,9 +68,5 @@ public class GameManager : MonoBehaviour
 	{
 		_Player.Move();
 		_Camera.Move();
-
-		for( int i = 0; i < _EnemyPrefabs.Length; i++ ){
-			_Enemys[i].Move();
-		}
 	}
 }

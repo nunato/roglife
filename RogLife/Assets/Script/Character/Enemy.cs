@@ -26,34 +26,4 @@ public class Enemy : MonoBehaviour
 		_Move.SetUp();
 	}
 
-	public void Move()
-	{
-		if( Input.GetKeyDown( KeyCode.UpArrow ) ){
-			if( _MapManager.CanMove( transform.position, eDir.UP )){
-				_Move.StartAnime( MapElement.ENEMY, Vector3.forward );
-				transform.rotation = Quaternion.Euler( 0, 0, 0 );
-			}
-		}
-		else if( Input.GetKeyDown( KeyCode.DownArrow ) ){
-			if( _MapManager.CanMove( transform.position, eDir.DOWN )){
-				_Move.StartAnime( MapElement.ENEMY, Vector3.back );
-				transform.rotation = Quaternion.Euler( 0, 180, 0 );
-			}
-		}
-		else if( Input.GetKeyDown( KeyCode.LeftArrow ) ){
-			if( _MapManager.CanMove( transform.position, eDir.LEFT )){
-				_Move.StartAnime( MapElement.ENEMY, Vector3.left );
-				transform.rotation = Quaternion.Euler( 0, 270, 0 );
-			}
-		}
-		else if( Input.GetKeyDown( KeyCode.RightArrow ) ){
-			if( _MapManager.CanMove( transform.position, eDir.RIGHT )){
-				_Move.StartAnime( MapElement.ENEMY, Vector3.right );
-				transform.rotation = Quaternion.Euler( 0, 90, 0 );
-			}
-		}
-		else{
-			//Do Nothing
-		}
-	}
 }

@@ -15,6 +15,8 @@ public class FollowPlayerCamera : MonoBehaviour
 		}
 		_Target = target;
 		_Margin = _Target.transform.position;
+		Vector3 pos = new Vector3( _Target.transform.position.x, transform.position.y, transform.position.z );
+		transform.position = pos;
 	}
 
 	public void Move()

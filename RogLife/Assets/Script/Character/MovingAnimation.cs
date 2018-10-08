@@ -15,30 +15,20 @@ public class MovingAnimation : MonoBehaviour
 	private float ElapsedTime = 0;
 	//移動中かの判定
 	private bool IsMoving;
-	//移動後のグリッド座標更新
-	private MapManager _MapManager;
 
 	public void SetUp()
 	{
-		_MapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
 		EndPos = transform.position;
 		IsMoving = false;
 	}
 
-	public void StartAnime( MapElement element, Vector3 targetPos )
+	public void StartAnime( Vector3 targetPos )
 	{
 		if( IsMoving != true ){
 			StartPos = transform.position;
 			EndPos = transform.position + targetPos;
 			ElapsedTime = 0;
 			IsMoving = true;
-			//グリッド座標の更新
-			int x = _MapManager.ToGridX( StartPos );
-			int y = _MapManager.ToGridY( StartPos );
-			_MapManager.DeleteData( x, y );
-			x = _MapManager.ToGridX( EndPos );
-			y = _MapManager.ToGridY( EndPos );
-			_MapManager.SetData( x, y, element );
 		}
 	}
 
