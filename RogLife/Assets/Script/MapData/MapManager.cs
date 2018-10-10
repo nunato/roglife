@@ -114,12 +114,14 @@ public class MapManager : MonoBehaviour
 				int Panel = _layer.Get( w, h );
 				if( Panel == (int)MapElement.WALL ){
 					GameObject cube = GameObject.CreatePrimitive( PrimitiveType.Cube );
+					cube.transform.parent = transform;
 					cube.transform.position = new Vector3( w, 0, h );
 					cube.GetComponent<Renderer>().material = _WallMaterial;
 				}
 				//床の生成
 				else if( Panel == (int)MapElement.FLOOR ){
 					GameObject cube = GameObject.CreatePrimitive( PrimitiveType.Cube );
+					cube.transform.parent = transform;
 					cube.transform.position = new Vector3( w, -1, h );
 					cube.GetComponent<Renderer>().material = _FloorMaterial;
 				}

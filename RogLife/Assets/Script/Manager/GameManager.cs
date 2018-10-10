@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
 			Debug.Log( "ERROR GameManager Start" );
 		}
 		SetUpCharactor();
+		SetUpCharactorParam();
+
 		SetUpCamera();
 	}
 
@@ -57,6 +59,20 @@ public class GameManager : MonoBehaviour
 			}
 			_Enemys[i].SetUp();
 		}
+	}
+
+	private void SetUpCharactorParam()
+	{
+		CharacterParam param = new CharacterParam();
+		//後でファイルから読み込むようにする
+		param.SetCharacterID(0);
+		param.Level = 1;
+		param.HP = 10;
+		param.HPMax = 10;
+		param.Str = 3;
+		param.Exp = 0;
+
+		_Player.SetCharacterParam( param );
 	}
 
 	private void SetUpCamera()

@@ -8,6 +8,8 @@ public class Enemy : MonoBehaviour
 	private MovingAnimation _Move;
 	//移動可能か判定
 	private MapManager _MapManager;
+	//キャラクターパラメータ
+	private CharacterParam _Param;
 
 	public void SetUp()
 	{
@@ -24,6 +26,7 @@ public class Enemy : MonoBehaviour
 
 		_Move = GetComponent<MovingAnimation>();
 		_Move.SetUp();
-	}
 
+		_Param = GetComponent<CharacterParam>();
+	}
 }

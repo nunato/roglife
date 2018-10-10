@@ -14,11 +14,17 @@ public struct SaveData
 	/* マップデータ */
 	public int[] _vals;
 
+	/*キャラクターデータ */
+//	public CharacterParam _Param;
+
 	public void Dump()
 	{
 		Debug.Log( _PlayerPos );
 		Debug.Log( _width );
 		Debug.Log( _height );
 		Debug.Log( _vals );
+
+//		Debug.Log( "--------------" );
+//		Debug.Log( _Param );
 	}
 }
