@@ -5,6 +5,8 @@ using UnityEngine;
 public class Actor : MonoBehaviour
 {
 	private eAct _ActorStetas;
+	//キャラクターパラメータ
+	private CharacterParam _Param;
 
 	public eAct ActorState
 	{
@@ -12,8 +14,16 @@ public class Actor : MonoBehaviour
 		get{ return _ActorStetas;}
 	}
 
-	void Start()
+	public void SetUp()
 	{
 		_ActorStetas = eAct.KEY_INPUT;
+
+		_Param = GetComponent<CharacterParam>();
+	}
+
+	public void SetCharacterParam( CharacterParam param )
+	{
+		_Param = param;
+		_Param.Dump();
 	}
 }

@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 
 	private GameObject _PlayerInstance;
 	private Player _Player;
+	private Actor _PlayerActor;
 	private GameObject[] _EnemyInstances;
 	private Enemy[] _Enemys;
 
@@ -41,6 +42,7 @@ public class GameManager : MonoBehaviour
 										_PlayerSpownPoint.position,
 										_PlayerSpownPoint.rotation ) as GameObject;
 		_Player = _PlayerInstance.GetComponent<Player>();
+		_PlayerActor = _PlayerInstance.GetComponent<Actor>();
 		if( _Player == null ){
 			Debug.Log( "ERROR player" );
 		}
@@ -63,7 +65,7 @@ public class GameManager : MonoBehaviour
 
 	private void SetUpCharactorParam()
 	{
-		CharacterParam param = new CharacterParam();
+		CharacterParam param = gameObject.AddComponent<CharacterParam>();
 		//後でファイルから読み込むようにする
 		param.SetCharacterID(0);
 		param.Level = 1;
@@ -72,7 +74,7 @@ public class GameManager : MonoBehaviour
 		param.Str = 3;
 		param.Exp = 0;
 
-		_Player.SetCharacterParam( param );
+		_PlayerActor.SetCharacterParam( param );
 	}
 
 	private void SetUpCamera()

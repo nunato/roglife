@@ -12,8 +12,6 @@ public class Player : MonoBehaviour
 	private MessageManager _MessageMan;
 	//状態変数
 	private Actor _Actor;
-	//キャラクターパラメータ
-	private CharacterParam _Param;
 
 	public void SetUp()
 	{
@@ -34,14 +32,7 @@ public class Player : MonoBehaviour
 		_MessageMan = GameObject.Find("MessageManager").GetComponent<MessageManager>();
 
 		_Actor = GetComponent<Actor>();
-
-		_Param = GetComponent<CharacterParam>();
-	}
-
-	public void SetCharacterParam( CharacterParam param )
-	{
-		_Param = param;
-		_Param.Dump();
+		_Actor.SetUp();
 	}
 
 	public void Move()
