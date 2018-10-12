@@ -1,30 +1,25 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/* このクラスはJsonUtilityを使うためにプロパティをpublicで宣言する */
+[Serializable]
 public struct SaveData
 {
 	/* プレイヤーの位置情報 */
 	public Vector3 _PlayerPos;
-	/* マップ情報 */
-	/* 横サイズ */
-	public int _width;
-	/* 縦サイズ */
-	public int _height;
-	/* マップデータ */
-	public int[] _vals;
-
 	/*キャラクターデータ */
-//	public CharacterParam _Param;
+	public CharacterParam _Param;
+	/* マップ情報 */
+	public Layer2D _MapData;
 
 	public void Dump()
 	{
 		Debug.Log( _PlayerPos );
-		Debug.Log( _width );
-		Debug.Log( _height );
-		Debug.Log( _vals );
-
-//		Debug.Log( "--------------" );
-//		Debug.Log( _Param );
+		Debug.Log( "--------------" );
+		Debug.Log( _Param );
+		Debug.Log( "--------------" );
+		Debug.Log( _MapData );
 	}
 }

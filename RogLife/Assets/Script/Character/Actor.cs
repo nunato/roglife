@@ -14,16 +14,14 @@ public class Actor : MonoBehaviour
 		get{ return _ActorStetas;}
 	}
 
+	public CharacterParam Param
+	{
+		set{ _Param = value;}
+		get{ return _Param;}
+	}
+
 	public void SetUp()
 	{
 		_ActorStetas = eAct.KEY_INPUT;
-
-		_Param = GetComponent<CharacterParam>();
-	}
-
-	public void SetCharacterParam( CharacterParam param )
-	{
-		_Param = param;
-		_Param.Dump();
 	}
 }

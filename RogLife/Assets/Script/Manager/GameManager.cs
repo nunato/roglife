@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour
 	private GameObject[] _EnemyInstances;
 	private Enemy[] _Enemys;
 
+	[SerializeField]
+	private SaveDataManager _SaveManager;
+
 	void Start()
 	{
 		if( _PlayerPrefab		== null	||
@@ -34,6 +37,8 @@ public class GameManager : MonoBehaviour
 		SetUpCharactorParam();
 
 		SetUpCamera();
+
+		_SaveManager.SetUp();
 	}
 
 	private void SetUpCharactor()
@@ -65,16 +70,16 @@ public class GameManager : MonoBehaviour
 
 	private void SetUpCharactorParam()
 	{
-		CharacterParam param = gameObject.AddComponent<CharacterParam>();
+		CharacterParam param = new CharacterParam();
 		//後でファイルから読み込むようにする
-		param.SetCharacterID(0);
-		param.Level = 1;
-		param.HP = 10;
-		param.HPMax = 10;
-		param.Str = 3;
-		param.Exp = 0;
+		param._ID = 0;
+		param._Level = 1;
+		param._HP = 10;
+		param._HPMax = 10;
+		param._Str = 3;
+		param._Exp = 0;
 
-		_PlayerActor.SetCharacterParam( param );
+		_PlayerActor.Param = param;
 	}
 
 	private void SetUpCamera()

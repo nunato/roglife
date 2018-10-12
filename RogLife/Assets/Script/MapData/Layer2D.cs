@@ -1,31 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Layer2D
+[Serializable]
+public struct Layer2D
 {
-	private int _width = 0;
-	private int _height = 0;
+	public int _width;
+	public int _height;
 
-	private int[] _vals = null;
-
-	public int Width
-	{
-		get{ return _width;}
-		set{ _width = value;}
-	}
-
-	public int Height
-	{
-		get{ return _height;}
-		set{ _height = value;}
-	}
-
-	public int[] Value
-	{
-		get{ return _vals;}
-		set{ _vals = value;}
-	}
+	public int[] _vals;
 
 	public void Create( int width, int height )
 	{

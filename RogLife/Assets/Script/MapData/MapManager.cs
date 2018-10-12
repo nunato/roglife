@@ -15,20 +15,26 @@ public class MapManager : MonoBehaviour
 
 	public int Width
 	{
-		get{ return _layer.Width;}
-		set{ _layer.Width = value;}
+		get{ return _layer._width;}
+		set{ _layer._width = value;}
 	}
 
 	public int Height
 	{
-		get{ return _layer.Height;}
-		set{ _layer.Height = value;}
+		get{ return _layer._height;}
+		set{ _layer._height = value;}
 	}
 
 	public int[] Value
 	{
-		get{ return _layer.Value;}
-		set{ _layer.Value = value;}
+		get{ return _layer._vals;}
+		set{ _layer._vals = value;}
+	}
+
+	public Layer2D MapData
+	{
+		get{ return _layer;}
+		set{ _layer = value;}
 	}
 
 	//移動先が移動できるマスであるか判定する
@@ -106,8 +112,8 @@ public class MapManager : MonoBehaviour
 	//MapDataから壁を読み込みキューブを生成する
 	private void CreateMapWall()
 	{
-		int height = _layer.Height;
-		int Width = _layer.Width;
+		int height = _layer._height;
+		int Width = _layer._width;
 		for( int h = 0; h < height; h++ ){
 			for( int w = 0; w < Width; w++ ){
 				//壁の生成
