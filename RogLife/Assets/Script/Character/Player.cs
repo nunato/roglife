@@ -46,6 +46,7 @@ public class Player : MonoBehaviour
 			int x = _MapManager.ToGridX( transform.position );
 			int y = _MapManager.ToGridY( transform.position );
 			_MapManager.SetData( x, y, MapElement.PLAYER );
+			_Actor.ActorState = eAct.KEY_INPUT;
 		}
 	}
 
@@ -54,6 +55,7 @@ public class Player : MonoBehaviour
 		if( Input.GetKeyDown( KeyCode.UpArrow ) ){
 			transform.rotation = Quaternion.Euler( 0, 0, 0 );
 			if( _MapManager.CanMove( transform.position, eDir.UP )){
+				_Actor.ActorState = eAct.MOVE_BEGIN;
 				deleteOldGridPosition();
 				_Move.StartAnime( Vector3.forward );
 				_MessageMan.AddMessage("上に動きました");
@@ -62,6 +64,7 @@ public class Player : MonoBehaviour
 		else if( Input.GetKeyDown( KeyCode.DownArrow ) ){
 			transform.rotation = Quaternion.Euler( 0, 180, 0 );
 			if( _MapManager.CanMove( transform.position, eDir.DOWN )){
+				_Actor.ActorState = eAct.MOVE_BEGIN;
 				deleteOldGridPosition();
 				_Move.StartAnime( Vector3.back );
 				_MessageMan.AddMessage("下に動きました");
@@ -70,6 +73,7 @@ public class Player : MonoBehaviour
 		else if( Input.GetKeyDown( KeyCode.LeftArrow ) ){
 			transform.rotation = Quaternion.Euler( 0, 270, 0 );
 			if( _MapManager.CanMove( transform.position, eDir.LEFT )){
+				_Actor.ActorState = eAct.MOVE_BEGIN;
 				deleteOldGridPosition();
 				_Move.StartAnime( Vector3.left );
 				_MessageMan.AddMessage("左に動きました");
@@ -78,6 +82,7 @@ public class Player : MonoBehaviour
 		else if( Input.GetKeyDown( KeyCode.RightArrow ) ){
 			transform.rotation = Quaternion.Euler( 0, 90, 0 );
 			if( _MapManager.CanMove( transform.position, eDir.RIGHT )){
+				_Actor.ActorState = eAct.MOVE_BEGIN;
 				deleteOldGridPosition();
 				_Move.StartAnime( Vector3.right );
 				_MessageMan.AddMessage("右に動きました");

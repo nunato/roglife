@@ -13,28 +13,28 @@ public class MovingAnimation : MonoBehaviour
 	private Vector3 EndPos;
 	//経過時間
 	private float ElapsedTime = 0;
-	//移動中かの判定
-	private bool IsMoving;
+	//状態変数
+	private Actor _Actor;
 
 	public void SetUp()
 	{
 		EndPos = transform.position;
-		IsMoving = false;
+		_Actor = GetComponent<Actor>();
 	}
 
 	public void StartAnime( Vector3 targetPos )
 	{
-		if( IsMoving != true ){
+		if( _Actor.ActorState == eAct.MOVE_BEGIN ){
 			StartPos = transform.position;
 			EndPos = transform.position + targetPos;
 			ElapsedTime = 0;
-			IsMoving = true;
+			_Actor.ActorState = eAct.MOVE;
 		}
 	}
 
 	void FixedUpdate()
 	{
-		if( IsMoving == true ){
+		if( _Actor.ActorState == eAct.MOVE ){
 			if( transform.position != EndPos ){
 				ElapsedTime += Time.deltaTime;
 				float rate = ElapsedTime / MoveDuration;
@@ -44,7 +44,7 @@ public class MovingAnimation : MonoBehaviour
 				transform.position = Vector3.Lerp(StartPos, EndPos, rate);
 			}
 			else{
-				IsMoving = false;
+				_Actor.ActorState = eAct.MOVE_END;
 			}
 		}
 	}
