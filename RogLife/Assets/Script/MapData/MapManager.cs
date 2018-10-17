@@ -13,54 +13,18 @@ public class MapManager : MonoBehaviour
 
 	private Layer2D _layer;
 
-	public int Width
-	{
-		get{ return _layer._width;}
-		set{ _layer._width = value;}
-	}
-
-	public int Height
-	{
-		get{ return _layer._height;}
-		set{ _layer._height = value;}
-	}
-
-	public int[] Value
-	{
-		get{ return _layer._vals;}
-		set{ _layer._vals = value;}
-	}
-
 	public Layer2D MapData
 	{
 		get{ return _layer;}
 		set{ _layer = value;}
 	}
 
-	//移動先が移動できるマスであるか判定する
+	//移動先が移動できるマスか判定する
 	public bool CanMove( Vector3 CurrentPos, eDir dir )
 	{
-		//ワールド座標からグリッド座標に無理やり変更しているので何か考える
-		int x = (int)CurrentPos.x;
-		int y = (int)CurrentPos.z;
+		int Panel = getNextPanel( CurrentPos, dir );
 
-		switch( dir ){
-			case eDir.LEFT:
-				x--;
-				break;
-			case eDir.UP:
-				y++;
-				break;
-			case eDir.RIGHT:
-				x++;
-				break;
-			case eDir.DOWN:
-				y--;
-				break;
-		}
-		int Panel = _layer.Get( x, y );
-
-		if( Panel != (int)MapElement.FLOOR ){
+		if( Panel != (int)eMapElement.FLOOR ){
 			return false;
 		}
 		else{
@@ -68,15 +32,49 @@ public class MapManager : MonoBehaviour
 		}
 	}
 
+	//移動先が敵キャラクターか判定する
+	public bool CanAttack( Vector3 CurrentPos, eDir dir )
+	{
+		int Panel = getNextPanel( CurrentPos, dir );
+
+		if( Panel != (int)eMapElement.ENEMY ){
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+
+	private int getNextPanel( Vector3 CurrentPos, eDir dir )
+	{
+		Vector2 GridPos = new Vector2( ToGridX( CurrentPos ), ToGridY( CurrentPos ) );
+
+		switch( dir ){
+			case eDir.LEFT:
+				GridPos.x--;
+				break;
+			case eDir.UP:
+				GridPos.y++;
+				break;
+			case eDir.RIGHT:
+				GridPos.x++;
+				break;
+			case eDir.DOWN:
+				GridPos.y--;
+				break;
+		}
+		return _layer.Get( (int)GridPos.x, (int)GridPos.y );
+	}
+
 	//マップデータにデータを追加する
-	public void SetData( int x, int y, MapElement element )
+	public void SetData( int x, int y, eMapElement element )
 	{
 		_layer.Set( x, y, (int)element );
 	}
 
 	public void DeleteData( int x, int y )
 	{
-		_layer.Set( x, y, (int)MapElement.FLOOR );
+		_layer.Set( x, y, (int)eMapElement.FLOOR );
 	}
 
 	// グリッド座標をワールド座標に変換
@@ -118,14 +116,14 @@ public class MapManager : MonoBehaviour
 			for( int w = 0; w < Width; w++ ){
 				//壁の生成
 				int Panel = _layer.Get( w, h );
-				if( Panel == (int)MapElement.WALL ){
+				if( Panel == (int)eMapElement.WALL ){
 					GameObject cube = GameObject.CreatePrimitive( PrimitiveType.Cube );
 					cube.transform.parent = transform;
 					cube.transform.position = new Vector3( w, 0, h );
 					cube.GetComponent<Renderer>().material = _WallMaterial;
 				}
 				//床の生成
-				else if( Panel == (int)MapElement.FLOOR ){
+				else if( Panel == (int)eMapElement.FLOOR ){
 					GameObject cube = GameObject.CreatePrimitive( PrimitiveType.Cube );
 					cube.transform.parent = transform;
 					cube.transform.position = new Vector3( w, -1, h );

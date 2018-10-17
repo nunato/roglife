@@ -19,12 +19,14 @@ public class FollowPlayerCamera : MonoBehaviour
 		transform.position = pos;
 	}
 
-	public void Move()
+	void Update()
 	{
 		if( _Target == null ){
 			Debug.Log( "ERROR FollowPlayerCamera Move" );
 		}
-		transform.position += _Target.transform.position - _Margin;
-		_Margin = _Target.transform.position;
+		else{
+			transform.position += _Target.transform.position - _Margin;
+			_Margin = _Target.transform.position;
+		}
 	}
 }

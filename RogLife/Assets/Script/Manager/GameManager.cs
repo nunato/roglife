@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
 	[SerializeField]
 	private SaveDataManager _SaveManager;
 
+	private InputManager _InputManager;
+
 	void Start()
 	{
 		if( _PlayerPrefab		== null	||
@@ -39,6 +41,12 @@ public class GameManager : MonoBehaviour
 		SetUpCamera();
 
 		_SaveManager.SetUp();
+
+		_InputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
+		if( _InputManager == null ){
+			Debug.Log("ERROR InputManager");
+		}
+		SetUpInputManager();
 	}
 
 	private void SetUpCharactor()
@@ -87,9 +95,44 @@ public class GameManager : MonoBehaviour
 		_Camera.SetUp( _PlayerInstance );
 	}
 
-	void Update()
+	private void SetUpInputManager()
 	{
-		_Player.Move();
-		_Camera.Move();
+		_InputManager._ActionUpArrow += ActionUp;
+		_InputManager._ActionDownArrow += ActionDown;
+		_InputManager._ActionLeftArrow += ActionLeft;
+		_InputManager._ActionRightArrow += ActionRight;
+	}
+
+	private void ActionUp()
+	{
+		Debug.Log("PRESS Up");
+		ActionUpdate( eDir.UP );
+	}
+
+	private void ActionDown()
+	{
+		Debug.Log("PRESS Down");
+		ActionUpdate( eDir.DOWN );
+	}
+
+	private void ActionLeft()
+	{
+		Debug.Log("PRESS Left");
+		ActionUpdate( eDir.LEFT );
+	}
+
+	private void ActionRight()
+	{
+		Debug.Log("PRESS Right");
+		ActionUpdate( eDir.RIGHT );
+	}
+
+	private void ActionUpdate( eDir dir )
+	{
+		_Player.Move( dir );
+		// キャラクターの移動アニメーションからカメラをUpdateする必要がある
+		//_Camera.Move();
+
+		_Player.Attack( dir );
 	}
 }
