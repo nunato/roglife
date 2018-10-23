@@ -19,7 +19,7 @@ public class MapManager : MonoBehaviour
 		set{ _layer = value;}
 	}
 
-	//移動先が移動できるマスか判定する
+	// 移動先が移動できるマスか判定する
 	public bool CanMove( Vector3 CurrentPos, eDir dir )
 	{
 		int Panel = getNextPanel( CurrentPos, dir );
@@ -32,7 +32,7 @@ public class MapManager : MonoBehaviour
 		}
 	}
 
-	//移動先が敵キャラクターか判定する
+	// 移動先が敵キャラクターか判定する
 	public bool CanAttack( Vector3 CurrentPos, eDir dir )
 	{
 		int Panel = getNextPanel( CurrentPos, dir );
@@ -46,6 +46,13 @@ public class MapManager : MonoBehaviour
 	}
 
 	private int getNextPanel( Vector3 CurrentPos, eDir dir )
+	{
+		Vector2 GridPos = GetGridPosFromDir( CurrentPos, dir );
+		return _layer.Get( (int)GridPos.x, (int)GridPos.y );
+	}
+
+	// 現在地点から指定方向の座標を取得する
+	public Vector2 GetGridPosFromDir( Vector3 CurrentPos, eDir dir )
 	{
 		Vector2 GridPos = new Vector2( ToGridX( CurrentPos ), ToGridY( CurrentPos ) );
 
@@ -63,15 +70,16 @@ public class MapManager : MonoBehaviour
 				GridPos.y--;
 				break;
 		}
-		return _layer.Get( (int)GridPos.x, (int)GridPos.y );
+		return GridPos;
 	}
 
-	//マップデータにデータを追加する
+	// マップデータにデータを追加する
 	public void SetData( int x, int y, eMapElement element )
 	{
 		_layer.Set( x, y, (int)element );
 	}
 
+	// マップデータのデータを床にする
 	public void DeleteData( int x, int y )
 	{
 		_layer.Set( x, y, (int)eMapElement.FLOOR );
@@ -99,8 +107,14 @@ public class MapManager : MonoBehaviour
 		y = (int)pos.z;
 		return y;
 	}
+	// ワールド座標をグリッド座標に変換
+	public Vector2 ToGridVector2( Vector3 pos )
+	{
+		Vector2 GridVector2Pos = new Vector2( ToGridX( pos ), ToGridY( pos ) );
+		return GridVector2Pos;
+	}
 
-	void Awake()
+	public void SetUp()
 	{
 		_layer = _TMXLoader.CreateMapData();
 

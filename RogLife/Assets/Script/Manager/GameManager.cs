@@ -20,11 +20,45 @@ public class GameManager : MonoBehaviour
 	private Actor _PlayerActor;
 	private GameObject[] _EnemyInstances;
 	private Enemy[] _Enemys;
+	private Actor[] _EnemyActors;
 
+	[SerializeField]
+	private MapManager _MapManager;
 	[SerializeField]
 	private SaveDataManager _SaveManager;
 
 	private InputManager _InputManager;
+
+	// 暫定のParamの取得
+	// ユニークIDをどこから取ってくるのか考える
+	public CharacterParam? GetCharacterParamFromId( int Id )
+	{
+		for( int i = 0; i < _EnemyPrefabs.Length; i++ ){
+			Actor _EnemyActor = _EnemyInstances[i].GetComponent<Actor>();
+			if ( _EnemyActor.Param._ID == Id ){
+				return _EnemyActor.Param;
+			}
+		}
+		return null;
+	}
+
+	// マップマネージャのポジションからActerにアクセスしてIDを返す
+	// プレイヤーか敵かは関係ない
+	// そのため今の配列ではわからない
+	// マップポジションをActorで持つようにしてそこからIDまで取れるようにしないと
+	public int? GetCharacterId( Vector2 targetMapPos )
+	{
+		if( _PlayerActor.GetMapPosition( ) == targetMapPos ){
+			return _PlayerActor.Param._ID;
+		}
+		
+		for( int i = 0; i < _EnemyPrefabs.Length; i++ ){
+			if( _EnemyActors[i].GetMapPosition( ) == targetMapPos ){
+				return _EnemyActors[i].Param._ID;
+			}
+		}
+		return null;
+	}
 
 	void Start()
 	{
@@ -35,8 +69,9 @@ public class GameManager : MonoBehaviour
 			_EnemySpownPoints	== null	){
 			Debug.Log( "ERROR GameManager Start" );
 		}
+		_MapManager.SetUp();
+
 		SetUpCharactor();
-		SetUpCharactorParam();
 
 		SetUpCamera();
 
@@ -51,21 +86,22 @@ public class GameManager : MonoBehaviour
 
 	private void SetUpCharactor()
 	{
-		_PlayerInstance = Instantiate( _PlayerPrefab,
+		_PlayerInstance = Instantiate(  _PlayerPrefab,
 										_PlayerSpownPoint.position,
 										_PlayerSpownPoint.rotation ) as GameObject;
 		_Player = _PlayerInstance.GetComponent<Player>();
-		_PlayerActor = _PlayerInstance.GetComponent<Actor>();
 		if( _Player == null ){
 			Debug.Log( "ERROR player" );
 		}
 		_Player.SetUp();
+		SetUpPlayerParam();
 
 		_EnemyInstances = new GameObject[_EnemyPrefabs.Length];
 		_Enemys = new Enemy[_EnemyPrefabs.Length];
+		_EnemyActors = new Actor[_EnemyPrefabs.Length];
 
 		for( int i = 0; i < _EnemyPrefabs.Length; i++ ){
-			_EnemyInstances[i] = Instantiate(  _EnemyPrefabs[i],
+			_EnemyInstances[i] = Instantiate(   _EnemyPrefabs[i],
 												_EnemySpownPoints[i].position,
 												_EnemySpownPoints[i].rotation ) as GameObject;
 			_Enemys[i] = _EnemyInstances[i].GetComponent<Enemy>();
@@ -73,21 +109,41 @@ public class GameManager : MonoBehaviour
 				Debug.Log( "ERROR enemy" );
 			}
 			_Enemys[i].SetUp();
+			SetUpEnemyParam();
 		}
 	}
 
-	private void SetUpCharactorParam()
+	private void SetUpPlayerParam()
 	{
-		CharacterParam param = new CharacterParam();
-		//後でファイルから読み込むようにする
+		CharacterParam param;
+		// 後でファイルから読み込むようにする
 		param._ID = 0;
 		param._Level = 1;
 		param._HP = 10;
 		param._HPMax = 10;
 		param._Str = 3;
 		param._Exp = 0;
+		param._XP = 0;
 
+		_PlayerActor = _PlayerInstance.GetComponent<Actor>();
 		_PlayerActor.Param = param;
+	}
+
+	private void SetUpEnemyParam()
+	{
+		CharacterParam param;
+		// 後でファイルから読み込むようにする
+		param._ID = 1;
+		param._Level = 1;
+		param._HP = 5;
+		param._HPMax = 5;
+		param._Str = 1;
+		param._Exp = 0;
+		param._XP = 2;
+		for( int i = 0; i < _EnemyPrefabs.Length; i++ ){
+			_EnemyActors[i] = _EnemyInstances[i].GetComponent<Actor>();
+			_EnemyActors[i].Param = param;
+		}
 	}
 
 	private void SetUpCamera()

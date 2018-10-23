@@ -340,7 +340,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1485, y: 360}
+  m_SizeDelta: {x: 1980, y: 360}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &390854820
 MonoBehaviour:
@@ -408,7 +408,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 90}
-  m_SizeDelta: {x: 1485, y: 90}
+  m_SizeDelta: {x: 1980, y: 90}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &611519026
 MonoBehaviour:
@@ -617,7 +617,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 180}
-  m_SizeDelta: {x: 1485, y: 90}
+  m_SizeDelta: {x: 1980, y: 90}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &882528169
 MonoBehaviour:
@@ -691,7 +691,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 270}
-  m_SizeDelta: {x: 1485, y: 90}
+  m_SizeDelta: {x: 1980, y: 90}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &916013721
 MonoBehaviour:
@@ -827,7 +827,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1485, y: 90}
+  m_SizeDelta: {x: 1980, y: 90}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &939135760
 MonoBehaviour:
@@ -1060,6 +1060,7 @@ MonoBehaviour:
   _PlayerSpownPoint: {fileID: 1196378810}
   _EnemySpownPoints:
   - {fileID: 1033049138}
+  _MapManager: {fileID: 1111701142}
   _SaveManager: {fileID: 719316804}
 --- !u!4 &1238965634
 Transform:

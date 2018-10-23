@@ -7,6 +7,7 @@ using UnityEngine;
 public struct CharacterParam
 {
 	public int _ID;	// ユニークID
+	// キャラクタータイプ用のIDを用意する
 	public int _Level;	// レベル
 	public int _HP;	// HP
 	public int _HPMax;	// 最大HP
@@ -22,5 +23,6 @@ public struct CharacterParam
 		Debug.Log( "HPMax " + _HPMax );
 		Debug.Log( "Str " + _Str );
 		Debug.Log( "Exp " + _Exp );
+		Debug.Log( "XP " + _XP );
 	}
 }

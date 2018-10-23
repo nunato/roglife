@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
 	// キャラクター共通処理
 	private Actor _Actor;
 
+	// 初期化メソッド
 	public void SetUp()
 	{
 		_Move = GetComponent<MovingAnimation>();
@@ -18,6 +19,7 @@ public class Player : MonoBehaviour
 		_Actor.SetUp( eMapElement.PLAYER );
 	}
 
+	// 移動メソッド
 	public void Move( eDir dir )
 	{
 		if( _Actor.ActorState == eAct.KEY_INPUT ){
@@ -62,19 +64,13 @@ public class Player : MonoBehaviour
 		return false;
 	}
 
+	// 攻撃メソッド
 	public void Attack( eDir dir )
 	{
 		if( _Actor.ActorState == eAct.KEY_INPUT ){
 			if( CanAttackAction( dir ) ){
 				_Actor.ActorState = eAct.ACT_BEGIN;
-				// 対象を取得してくるようにする
-				// GetTarget()
-				eMapElement targetEnemy = eMapElement.ENEMY;
-				// 対象のステータスと自身のステータスを渡して
-				// ダメージを計算する
-				int giveDamage = 0;
-				_Actor.AddMessage( targetEnemy + " に " + giveDamage + " のダメージ " );
-				_Actor.ActorState = eAct.KEY_INPUT;
+				_Actor.StartAttack( dir );
 			}
 		}
 	}
