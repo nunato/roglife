@@ -54,9 +54,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4737005314065734}
   - component: {fileID: 114595944299822852}
-  - component: {fileID: 114099250308742828}
-  - component: {fileID: 114552016056116034}
-  - component: {fileID: 114635573040446328}
   m_Layer: 0
   m_Name: slime
   m_TagString: Untagged
@@ -262,29 +259,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1059926527435184}
   m_Mesh: {fileID: 4300002, guid: 3ab1db0c52ee1954c9c17dd901052515, type: 3}
---- !u!114 &114099250308742828
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1364570586066172}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 753242bc676de6b44ada1ddcecda8f0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MoveDuration: 0.2
---- !u!114 &114552016056116034
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1364570586066172}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1198f03041ac234fa1e8f4ea571c6fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114595944299822852
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -294,16 +268,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ddfecef886dacc4da8bbd202ee77147, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114635573040446328
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1364570586066172}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64a6358904388054abbcca9abf013cc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

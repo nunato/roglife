@@ -13,27 +13,30 @@ public class MovingAnimation : MonoBehaviour
 	private Vector3 EndPos;
 	//経過時間
 	private float ElapsedTime = 0;
-	//状態変数
-	private Actor _Actor;
 
 	private MapManager _MapManager;
+	private GameManager _GameManager;
 
 	public void SetUp()
 	{
 		_MapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
 		EndPos = transform.position;
-		_Actor = GetComponent<Actor>();
+
+		_GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 	}
 
 	public void StartAnime( eDir dir )
 	{
 		Vector3 targetPos = ConvertActionToTargetPosition( dir );
 
-		if( _Actor.ActorState == eAct.MOVE_BEGIN ){
+		if( _GameManager.GameSequence == eSequence.PLAYER_MOVE_BEGIN ){
 			StartPos = transform.position;
 			EndPos = transform.position + targetPos;
 			ElapsedTime = 0;
-			_Actor.ActorState = eAct.MOVE;
+			_GameManager.GameSequence = eSequence.PLAYER_MOVE;
+		}
+		else{
+			_GameManager.GameSequence = eSequence.KEY_INPUT;
 		}
 	}
 
@@ -53,9 +56,10 @@ public class MovingAnimation : MonoBehaviour
 		}
 	}
 
-	void FixedUpdate()
+	// Moveの間この関数を呼び続ける
+	public void UpdatePosition()
 	{
-		if( _Actor.ActorState == eAct.MOVE ){
+		if( _GameManager.GameSequence == eSequence.PLAYER_MOVE ){
 			if( transform.position != EndPos ){
 				ElapsedTime += Time.deltaTime;
 				float rate = ElapsedTime / MoveDuration;
@@ -69,7 +73,7 @@ public class MovingAnimation : MonoBehaviour
 				int x = _MapManager.ToGridX( transform.position );
 				int y = _MapManager.ToGridY( transform.position );
 				_MapManager.SetData( x, y, eMapElement.PLAYER );
-				_Actor.ActorState = eAct.KEY_INPUT;
+				_GameManager.GameSequence = eSequence.PLAYER_MOVE_END;
 			}
 		}
 	}

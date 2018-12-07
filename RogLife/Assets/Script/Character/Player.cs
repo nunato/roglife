@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
 	// キャラクター共通処理
 	private Actor _Actor;
 
+	private GameManager _GameManager;
+
 	// 初期化メソッド
 	public void SetUp()
 	{
@@ -17,21 +19,24 @@ public class Player : MonoBehaviour
 
 		_Actor = GetComponent<Actor>();
 		_Actor.SetUp( eMapElement.PLAYER );
+
+		_GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 	}
 
 	// 移動メソッド
 	public void Move( eDir dir )
 	{
-		if( _Actor.ActorState == eAct.KEY_INPUT ){
-			// 向きの変更。移動できない場合も方向は変更する
-			SetRotation( dir );
-			// 移動の判定
-			if( CanMoveAction( dir ) ){
-				_Actor.ActorState = eAct.MOVE_BEGIN;
-				_Actor.DeleteOldGridPosition();
-				_Move.StartAnime( dir );
-				_Actor.AddMessage( dir + " に動きました");
-			}
+		// 向きの変更。移動できない場合も方向は変更する
+		SetRotation( dir );
+		// 移動の判定
+		if( CanMoveAction( dir ) ){
+			// 移動の開始に遷移
+			_GameManager.GameSequence = eSequence.PLAYER_MOVE_BEGIN;
+			// 古い座標を削除する
+			_Actor.DeleteOldGridPosition();
+			// 移動アニメーションを開始する
+			_Move.StartAnime( dir );
+			_Actor.AddMessage( dir + " に動きました");
 		}
 	}
 
@@ -67,9 +72,9 @@ public class Player : MonoBehaviour
 	// 攻撃メソッド
 	public void Attack( eDir dir )
 	{
-		if( _Actor.ActorState == eAct.KEY_INPUT ){
+		if( _GameManager.GameSequence == eSequence.KEY_INPUT ){
 			if( CanAttackAction( dir ) ){
-				_Actor.ActorState = eAct.ACT_BEGIN;
+				_GameManager.GameSequence = eSequence.ACT_BEGIN;
 				_Actor.StartAttack( dir );
 			}
 		}
@@ -81,5 +86,17 @@ public class Player : MonoBehaviour
 			return true;
 		}
 		return false;
+	}
+
+	void Update()
+	{
+		// 移動状態のときpositionを更新する
+		if( _GameManager.GameSequence == eSequence.PLAYER_MOVE ){
+			_Move.UpdatePosition();
+		}
+		// 移動終わったらキー入力待ちに戻る
+		if( _GameManager.GameSequence == eSequence.PLAYER_MOVE_END ){
+			_GameManager.GameSequence = eSequence.KEY_INPUT;
+		}
 	}
 }

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Actor : MonoBehaviour
 {
-	// キャラクター状態
-	private eAct _ActorStetas;
 	// キャラクターパラメータ
 	private CharacterParam _Param;
 	// マップデータ
@@ -17,12 +15,6 @@ public class Actor : MonoBehaviour
 	//
 	private GameManager _GameManager;
 
-	public eAct ActorState
-	{
-		set{ _ActorStetas = value;}
-		get{ return _ActorStetas;}
-	}
-
 	public CharacterParam Param
 	{
 		set{ _Param = value;}
@@ -31,7 +23,6 @@ public class Actor : MonoBehaviour
 
 	public void SetUp( eMapElement eElement )
 	{
-		_ActorStetas = eAct.KEY_INPUT;
 		_MapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
 
 		// ワールド座標の開始位置をマップデータに入力する
@@ -46,7 +37,9 @@ public class Actor : MonoBehaviour
 		_MessageMan = GameObject.Find("MessageManager").GetComponent<MessageManager>();
 
 		_Attack = GetComponent<AttackAnimation>();
-		_Attack.SetUp();
+		if( _Attack != null ){
+			_Attack.SetUp();
+		}
 
 		_GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 	}

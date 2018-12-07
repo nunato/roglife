@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class AttackAnimation : MonoBehaviour
 {
-	private Actor _Actor;
+	private GameManager _GameManager;
 	
 	public void SetUp()
 	{
-		_Actor = GetComponent<Actor>();
+		_GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 	}
 
 	public void StartAnimation()
 	{
-		_Actor.ActorState = eAct.KEY_INPUT;
+		Debug.Log( "ここはまだ呼ばれない" );
+	//	_GameManager.GameSequence = eSequence.KEY_INPUT;
 	}
 }

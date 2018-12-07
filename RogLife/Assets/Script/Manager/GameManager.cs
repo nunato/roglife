@@ -15,6 +15,17 @@ public class GameManager : MonoBehaviour
 	[SerializeField]
 	private Transform[] _EnemySpownPoints;
 
+	// ゲーム状態
+	private eSequence _Sequence = eSequence.SETUP;
+
+	public eSequence GameSequence
+	{
+		set{
+			_Sequence = value;
+		}
+		get{ return _Sequence;}
+	}
+
 	private GameObject _PlayerInstance;
 	private Player _Player;
 	private Actor _PlayerActor;
@@ -26,7 +37,7 @@ public class GameManager : MonoBehaviour
 	private MapManager _MapManager;
 	[SerializeField]
 	private SaveDataManager _SaveManager;
-
+	[SerializeField]
 	private InputManager _InputManager;
 
 	// 暫定のParamの取得
@@ -77,11 +88,10 @@ public class GameManager : MonoBehaviour
 
 		_SaveManager.SetUp();
 
-		_InputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
-		if( _InputManager == null ){
-			Debug.Log("ERROR InputManager");
-		}
 		SetUpInputManager();
+
+		// キー入力待ちにする
+		GameSequence = eSequence.KEY_INPUT;
 	}
 
 	private void SetUpCharactor()
@@ -142,7 +152,7 @@ public class GameManager : MonoBehaviour
 		param._XP = 2;
 		for( int i = 0; i < _EnemyPrefabs.Length; i++ ){
 			_EnemyActors[i] = _EnemyInstances[i].GetComponent<Actor>();
-			_EnemyActors[i].Param = param;
+		//	_EnemyActors[i].Param = param;
 		}
 	}
 
@@ -185,10 +195,12 @@ public class GameManager : MonoBehaviour
 
 	private void ActionUpdate( eDir dir )
 	{
-		_Player.Move( dir );
-		// キャラクターの移動アニメーションからカメラをUpdateする必要がある
-		//_Camera.Move();
+		if( GameSequence == eSequence.KEY_INPUT ){
+			_Player.Move( dir );
+			// キャラクターの移動アニメーションからカメラをUpdateする必要がある
+			//_Camera.Move();
 
-		_Player.Attack( dir );
+			_Player.Attack( dir );
+		}
 	}
 }

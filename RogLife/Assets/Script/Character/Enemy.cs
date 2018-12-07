@@ -12,9 +12,13 @@ public class Enemy : MonoBehaviour
 	public void SetUp()
 	{
 		_Move = GetComponent<MovingAnimation>();
-		_Move.SetUp();
+		if( _Move != null ){
+			_Move.SetUp();
+		}
 
 		_Actor = GetComponent<Actor>();
-		_Actor.SetUp( eMapElement.ENEMY );
+		if( _Actor != null ){
+			_Actor.SetUp( eMapElement.ENEMY );
+		}
 	}
 }
