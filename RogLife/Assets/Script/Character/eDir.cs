@@ -9,4 +9,5 @@ public enum eDir
 	UP,
 	RIGHT,
 	DOWN,
+	NONE,
 }

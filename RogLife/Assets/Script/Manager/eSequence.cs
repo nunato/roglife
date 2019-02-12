@@ -9,6 +9,7 @@ public enum eSequence
 	KEY_INPUT,	// キー入力待ち
 
 	// 移動
+	MOVE_BEGIN,
 	PLAYER_MOVE_BEGIN,
 	PLAYER_MOVE,
 	PLAYER_MOVE_END,
@@ -16,6 +17,7 @@ public enum eSequence
 	ENEMY_MOVE_BEGIN,
 	ENEMY_MOVE,
 	ENEMY_MOVE_END,
+	MOVE_END,
 
 	//行動
 	ACT_BEGIN,

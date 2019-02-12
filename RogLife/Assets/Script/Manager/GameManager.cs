@@ -40,6 +40,9 @@ public class GameManager : MonoBehaviour
 	[SerializeField]
 	private InputManager _InputManager;
 
+	// 暫定
+	private eDir OldDir = eDir.NONE;
+
 	// 暫定のParamの取得
 	// ユニークIDをどこから取ってくるのか考える
 	public CharacterParam? GetCharacterParamFromId( int Id )
@@ -197,10 +200,24 @@ public class GameManager : MonoBehaviour
 	{
 		if( GameSequence == eSequence.KEY_INPUT ){
 			_Player.Move( dir );
+			OldDir = dir;
 			// キャラクターの移動アニメーションからカメラをUpdateする必要がある
 			//_Camera.Move();
 
-			_Player.Attack( dir );
+			// _Player.Attack( dir );
+		}
+	}
+
+	void Update()
+	{
+		if( GameSequence == eSequence.PLAYER_MOVE_END ){
+			for( int i = 0; i < _EnemyPrefabs.Length; i++ ){
+				_Enemys[i].Move( OldDir );
+			}
+		}
+
+		if( GameSequence == eSequence.MOVE_END ){
+			GameSequence = eSequence.KEY_INPUT;
 		}
 	}
 }

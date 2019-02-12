@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
 			// 移動アニメーションを開始する
 			_Move.StartAnime( dir );
 			_Actor.AddMessage( dir + " に動きました");
+			_GameManager.GameSequence = eSequence.PLAYER_MOVE;
 		}
 	}
 
@@ -92,11 +93,11 @@ public class Player : MonoBehaviour
 	{
 		// 移動状態のときpositionを更新する
 		if( _GameManager.GameSequence == eSequence.PLAYER_MOVE ){
-			_Move.UpdatePosition();
-		}
-		// 移動終わったらキー入力待ちに戻る
-		if( _GameManager.GameSequence == eSequence.PLAYER_MOVE_END ){
-			_GameManager.GameSequence = eSequence.KEY_INPUT;
+			bool IsMove =　_Move.UpdatePosition();
+			// 移動終わったら敵に移る
+			if( IsMove == false ){
+				_GameManager.GameSequence = eSequence.PLAYER_MOVE_END;
+			}
 		}
 	}
 }

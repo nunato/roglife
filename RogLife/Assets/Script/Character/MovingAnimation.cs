@@ -15,29 +15,20 @@ public class MovingAnimation : MonoBehaviour
 	private float ElapsedTime = 0;
 
 	private MapManager _MapManager;
-	private GameManager _GameManager;
 
 	public void SetUp()
 	{
 		_MapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
 		EndPos = transform.position;
-
-		_GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 	}
 
 	public void StartAnime( eDir dir )
 	{
 		Vector3 targetPos = ConvertActionToTargetPosition( dir );
 
-		if( _GameManager.GameSequence == eSequence.PLAYER_MOVE_BEGIN ){
-			StartPos = transform.position;
-			EndPos = transform.position + targetPos;
-			ElapsedTime = 0;
-			_GameManager.GameSequence = eSequence.PLAYER_MOVE;
-		}
-		else{
-			_GameManager.GameSequence = eSequence.KEY_INPUT;
-		}
+		StartPos = transform.position;
+		EndPos = transform.position + targetPos;
+		ElapsedTime = 0;
 	}
 
 	private Vector3 ConvertActionToTargetPosition( eDir dir )
@@ -57,24 +48,23 @@ public class MovingAnimation : MonoBehaviour
 	}
 
 	// Moveの間この関数を呼び続ける
-	public void UpdatePosition()
+	public bool UpdatePosition()
 	{
-		if( _GameManager.GameSequence == eSequence.PLAYER_MOVE ){
-			if( transform.position != EndPos ){
-				ElapsedTime += Time.deltaTime;
-				float rate = ElapsedTime / MoveDuration;
-				//rateを0~1の範囲に収める
-				rate = Mathf.Clamp(rate, 0f, 1f);
-				//Lerp：StartPosを0,EndPosを1としたときに、rate(0~１)の位置を返してくれる
-				transform.position = Vector3.Lerp(StartPos, EndPos, rate);
-			}
-			else{
-				//移動後のグリッド座標の更新
-				int x = _MapManager.ToGridX( transform.position );
-				int y = _MapManager.ToGridY( transform.position );
-				_MapManager.SetData( x, y, eMapElement.PLAYER );
-				_GameManager.GameSequence = eSequence.PLAYER_MOVE_END;
-			}
+		if( transform.position != EndPos ){
+			ElapsedTime += Time.deltaTime;
+			float rate = ElapsedTime / MoveDuration;
+			//rateを0~1の範囲に収める
+			rate = Mathf.Clamp(rate, 0f, 1f);
+			//Lerp：StartPosを0,EndPosを1としたときに、rate(0~１)の位置を返してくれる
+			transform.position = Vector3.Lerp(StartPos, EndPos, rate);
+			return true;
+		}
+		else{
+			//移動後のグリッド座標の更新
+			int x = _MapManager.ToGridX( transform.position );
+			int y = _MapManager.ToGridY( transform.position );
+			_MapManager.SetData( x, y, eMapElement.PLAYER );
+			return false;
 		}
 	}
 }
