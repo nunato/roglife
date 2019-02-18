@@ -10,6 +10,9 @@ public class MapManager : MonoBehaviour
 	private Material _WallMaterial;
 	[SerializeField]
 	private Material _FloorMaterial;
+	[SerializeField]
+	private GameObject _StairsPrefab;
+	private GameObject _StairsInstance;
 
 	private Layer2D _layer;
 
@@ -128,7 +131,7 @@ public class MapManager : MonoBehaviour
 		int Width = _layer._width;
 		for( int h = 0; h < height; h++ ){
 			for( int w = 0; w < Width; w++ ){
-				//壁の生成
+				// 壁の生成
 				int Panel = _layer.Get( w, h );
 				if( Panel == (int)eMapElement.WALL ){
 					GameObject cube = GameObject.CreatePrimitive( PrimitiveType.Cube );
@@ -136,12 +139,19 @@ public class MapManager : MonoBehaviour
 					cube.transform.position = new Vector3( w, 0, h );
 					cube.GetComponent<Renderer>().material = _WallMaterial;
 				}
-				//床の生成
+				// 床の生成
 				else if( Panel == (int)eMapElement.FLOOR ){
 					GameObject cube = GameObject.CreatePrimitive( PrimitiveType.Cube );
 					cube.transform.parent = transform;
 					cube.transform.position = new Vector3( w, -1, h );
 					cube.GetComponent<Renderer>().material = _FloorMaterial;
+				}
+				// 階段の生成
+				else if( Panel == (int)eMapElement.STAIRS ){
+					Vector3 stairPosition = new Vector3( w, 0, h );
+					_StairsInstance = Instantiate(  _StairsPrefab,
+													stairPosition,
+													Quaternion.identity ) as GameObject;
 				}
 			}
 		}

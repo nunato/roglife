@@ -974,6 +974,8 @@ MonoBehaviour:
   _TMXLoader: {fileID: 1111701144}
   _WallMaterial: {fileID: 2100000, guid: 7502ac366d54c9a4c9dd440992bdf2ba, type: 2}
   _FloorMaterial: {fileID: 2100000, guid: 4e66649410428564c9c371b53c6fca2b, type: 2}
+  _StairsPrefab: {fileID: 1220997452539692, guid: 8ac9a1eb1c4eeee40a310bce01f8b2bd,
+    type: 2}
 --- !u!4 &1111701143
 Transform:
   m_ObjectHideFlags: 0

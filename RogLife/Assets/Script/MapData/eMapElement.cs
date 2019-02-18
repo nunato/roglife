@@ -6,6 +6,7 @@ public enum eMapElement
 {
 	FLOOR = 1,
 	WALL,
-	PLAYER,
+	STAIRS,
+	PLAYER = 100,
 	ENEMY,
 }
