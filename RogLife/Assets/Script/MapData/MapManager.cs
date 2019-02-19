@@ -27,7 +27,7 @@ public class MapManager : MonoBehaviour
 	{
 		int Panel = getNextPanel( CurrentPos, dir );
 
-		if( Panel != (int)eMapElement.FLOOR ){
+		if( Panel == (int)eMapElement.WALL ){
 			return false;
 		}
 		else{
