@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
 	private Actor _Actor;
 
 	private GameManager _GameManager;
+	private StairsManager _StairsManager;
+	private MapManager _MapManager;
 
 	// 初期化メソッド
 	public void SetUp()
@@ -21,6 +23,8 @@ public class Player : MonoBehaviour
 		_Actor.SetUp( eMapElement.PLAYER );
 
 		_GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+		_StairsManager = GameObject.Find("StairsManager").GetComponent<StairsManager>();
+		_MapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
 	}
 
 	// 移動メソッド
@@ -38,6 +42,9 @@ public class Player : MonoBehaviour
 			_Move.StartAnime( dir );
 			_Actor.AddMessage( dir + " に動きました");
 			_GameManager.GameSequence = eSequence.PLAYER_MOVE;
+			if( _MapManager.IsStair( transform.position, dir ) == true ){
+				_StairsManager.IncrementStairsCount();
+			}
 		}
 	}
 

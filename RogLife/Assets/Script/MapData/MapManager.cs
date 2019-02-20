@@ -22,6 +22,17 @@ public class MapManager : MonoBehaviour
 		set{ _layer = value;}
 	}
 
+	public bool IsStair( Vector3 CurrentPos, eDir dir )
+	{
+		int Panel = getNextPanel( CurrentPos, dir );
+		if( Panel == (int)eMapElement.STAIRS ){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
 	// 移動先が移動できるマスか判定する
 	public bool CanMove( Vector3 CurrentPos, eDir dir )
 	{
