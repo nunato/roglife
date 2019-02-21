@@ -9,6 +9,7 @@ public class InputManager : MonoBehaviour
 	public event Action _ActionDownArrow;
 	public event Action _ActionLeftArrow;
 	public event Action _ActionRightArrow;
+	public event Action _ActionMKey;
 
 	void Update()
 	{
@@ -23,6 +24,9 @@ public class InputManager : MonoBehaviour
 		}
 		if( Input.GetKeyDown( KeyCode.RightArrow ) ){
 			_ActionRightArrow();
+		}
+		if( Input.GetKeyDown( KeyCode.M ) ){
+			_ActionMKey();
 		}
 	}
 }

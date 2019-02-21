@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour
 	private SaveDataManager _SaveManager;
 	[SerializeField]
 	private InputManager _InputManager;
+	[SerializeField]
+	private MapPanelManager _MapPanelManager;
 
 	// 暫定
 	private eDir OldDir = eDir.NONE;
@@ -170,6 +172,7 @@ public class GameManager : MonoBehaviour
 		_InputManager._ActionDownArrow += ActionDown;
 		_InputManager._ActionLeftArrow += ActionLeft;
 		_InputManager._ActionRightArrow += ActionRight;
+		_InputManager._ActionMKey += ActionMKey;
 	}
 
 	private void ActionUp()
@@ -194,6 +197,11 @@ public class GameManager : MonoBehaviour
 	{
 		Debug.Log("PRESS Right");
 		ActionUpdate( eDir.RIGHT );
+	}
+
+	private void ActionMKey()
+	{
+		_MapPanelManager.SwitchMapPanelActive();
 	}
 
 	private void ActionUpdate( eDir dir )
