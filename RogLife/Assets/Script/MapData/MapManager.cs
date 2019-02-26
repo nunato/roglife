@@ -160,9 +160,7 @@ public class MapManager : MonoBehaviour
 				// 階段の生成
 				else if( Panel == (int)eMapElement.STAIRS ){
 					Vector3 stairPosition = new Vector3( w, 0, h );
-					_StairsInstance = Instantiate(  _StairsPrefab,
-													stairPosition,
-													Quaternion.identity ) as GameObject;
+					Instantiate( _StairsPrefab, stairPosition, Quaternion.identity );
 				}
 			}
 		}

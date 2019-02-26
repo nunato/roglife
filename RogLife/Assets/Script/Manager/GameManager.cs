@@ -86,6 +86,7 @@ public class GameManager : MonoBehaviour
 			Debug.Log( "ERROR GameManager Start" );
 		}
 		_MapManager.SetUp();
+		_MapPanelManager.SetUp();
 
 		SetUpCharactor();
 

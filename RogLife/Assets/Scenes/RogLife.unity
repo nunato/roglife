@@ -1114,6 +1114,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _MapPanel: {fileID: 1451168322}
+  _MapManager: {fileID: 1111701142}
+  _PanelPrefab: {fileID: 1199343043792258, guid: cf20fc4e1fd7e894e952186c08dbf8f8,
+    type: 2}
 --- !u!1 &1196378809
 GameObject:
   m_ObjectHideFlags: 0
