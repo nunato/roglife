@@ -42,14 +42,17 @@ public class MapPanelManager : MonoBehaviour
 			for( int w = 0; w < MapWidth; w++ ){
 				int Panel = _layer.Get( w, h );
 				if( Panel == (int)eMapElement.WALL ){
-					Vector3 position = new Vector3(w * 100, h * 100, 0 );
-					Debug.Log(position);
+					Vector3 position = new Vector3(w * 50, h * 50, 0 );
 					GameObject panel = Instantiate( _PanelPrefab );
-					panel.GetComponent<RectTransform>().anchoredPosition = new Vector2(w * 100, h * 100);
+					panel.GetComponent<RectTransform>().anchoredPosition = new Vector2(w * 50, h * 50);
 					panel.transform.SetParent(_MapPanel.transform, false);
 				}
 				else if( Panel == (int)eMapElement.STAIRS ){
-
+					Vector3 position = new Vector3(w * 50, h * 50, 0 );
+					GameObject panel = Instantiate( _PanelPrefab );
+					panel.GetComponent<RectTransform>().anchoredPosition = new Vector2(w * 50, h * 50);
+					panel.transform.SetParent(_MapPanel.transform, false);
+					panel.GetComponent<Image>().color = Color.blue;
 				}
 			}
 		}
