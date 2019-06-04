@@ -174,7 +174,11 @@ public class GameManager : MonoBehaviour
 		_InputManager._ActionDownArrow += ActionDown;
 		_InputManager._ActionLeftArrow += ActionLeft;
 		_InputManager._ActionRightArrow += ActionRight;
+
 		_InputManager._ActionMKey += ActionMKey;
+
+		_InputManager._ActionSKey += _SaveManager.ActionSave;
+		_InputManager._ActionLKey += _SaveManager.ActionLoad;
 	}
 
 	private void ActionUp()

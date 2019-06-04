@@ -40,7 +40,6 @@ public class Player : MonoBehaviour
 			_Actor.DeleteOldGridPosition();
 			// 移動アニメーションを開始する
 			_Move.StartAnime( dir );
-			_Actor.AddMessage( dir + " に動きました");
 			_GameManager.GameSequence = eSequence.PLAYER_MOVE;
 			if( _MapManager.IsStair( transform.position, dir ) == true ){
 				_StairsManager.IncrementStairsCount();

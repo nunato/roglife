@@ -38,7 +38,6 @@ public class Enemy : MonoBehaviour
 			_Actor.DeleteOldGridPosition();
 			// 移動アニメーションを開始する
 			_Move.StartAnime( dir );
-			_Actor.AddMessage("敵は" + dir + " に動きました");
 			_GameManager.GameSequence = eSequence.ENEMY_MOVE;
 		}
 	}

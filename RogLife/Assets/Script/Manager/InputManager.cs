@@ -9,24 +9,34 @@ public class InputManager : MonoBehaviour
 	public event Action _ActionDownArrow;
 	public event Action _ActionLeftArrow;
 	public event Action _ActionRightArrow;
+
 	public event Action _ActionMKey;
+
+	public event Action _ActionSKey;
+	public event Action _ActionLKey;
 
 	void Update()
 	{
 		if( Input.GetKeyDown( KeyCode.UpArrow ) ){
 			_ActionUpArrow();
 		}
-		if( Input.GetKeyDown( KeyCode.DownArrow ) ){
+		else if( Input.GetKeyDown( KeyCode.DownArrow ) ){
 			_ActionDownArrow();
 		}
-		if( Input.GetKeyDown( KeyCode.LeftArrow ) ){
+		else if( Input.GetKeyDown( KeyCode.LeftArrow ) ){
 			_ActionLeftArrow();
 		}
-		if( Input.GetKeyDown( KeyCode.RightArrow ) ){
+		else if( Input.GetKeyDown( KeyCode.RightArrow ) ){
 			_ActionRightArrow();
 		}
-		if( Input.GetKeyDown( KeyCode.M ) ){
+		else if( Input.GetKeyDown( KeyCode.M ) ){
 			_ActionMKey();
+		}
+		else if( Input.GetKeyDown( KeyCode.S ) ){
+			_ActionSKey();
+		}
+		else if( Input.GetKeyDown( KeyCode.L ) ){
+			_ActionLKey();
 		}
 	}
 }
