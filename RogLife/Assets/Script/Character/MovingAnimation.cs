@@ -48,7 +48,7 @@ public class MovingAnimation : MonoBehaviour
 	}
 
 	// Moveの間この関数を呼び続ける
-	public bool UpdatePosition()
+	public bool UpdatePosition( eMapElement element )
 	{
 		if( transform.position != EndPos ){
 			ElapsedTime += Time.deltaTime;
@@ -63,7 +63,7 @@ public class MovingAnimation : MonoBehaviour
 			//移動後のグリッド座標の更新
 			int x = _MapManager.ToGridX( transform.position );
 			int y = _MapManager.ToGridY( transform.position );
-			_MapManager.SetData( x, y, eMapElement.PLAYER );
+			_MapManager.SetData( x, y, element );
 			return false;
 		}
 	}

@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
 	private GameManager _GameManager;
 	private StairsManager _StairsManager;
 	private MapManager _MapManager;
+	private eMapElement _Element;
 
 	// 初期化メソッド
 	public void SetUp()
@@ -20,7 +21,8 @@ public class Player : MonoBehaviour
 		_Move.SetUp();
 
 		_Actor = GetComponent<Actor>();
-		_Actor.SetUp( eMapElement.PLAYER );
+		_Element = eMapElement.PLAYER;
+		_Actor.SetUp( _Element );
 
 		_GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 		_StairsManager = GameObject.Find("StairsManager").GetComponent<StairsManager>();
@@ -99,7 +101,7 @@ public class Player : MonoBehaviour
 	{
 		// 移動状態のときpositionを更新する
 		if( _GameManager.GameSequence == eSequence.PLAYER_MOVE ){
-			bool IsMove =　_Move.UpdatePosition();
+			bool IsMove =　_Move.UpdatePosition( _Element );
 			// 移動終わったら敵に移る
 			if( IsMove == false ){
 				_GameManager.GameSequence = eSequence.PLAYER_MOVE_END;

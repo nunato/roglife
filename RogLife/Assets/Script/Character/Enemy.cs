@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
 	private Actor _Actor;
 
 	private GameManager _GameManager;
+	private eMapElement _Element;
 
 	public void SetUp()
 	{
@@ -20,7 +21,8 @@ public class Enemy : MonoBehaviour
 
 		_Actor = GetComponent<Actor>();
 		if( _Actor != null ){
-			_Actor.SetUp( eMapElement.ENEMY );
+			_Element = eMapElement.ENEMY;
+			_Actor.SetUp( _Element );
 		}
 
 		_GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -75,7 +77,7 @@ public class Enemy : MonoBehaviour
 	{
 		// 移動状態のときpositionを更新する
 		if( _GameManager.GameSequence == eSequence.ENEMY_MOVE ){
-			bool IsMove =　_Move.UpdatePosition();
+			bool IsMove =　_Move.UpdatePosition( _Element );
 			// 敵の移動終わったら移動完了
 			if( IsMove == false ){
 				_GameManager.GameSequence = eSequence.MOVE_END;
