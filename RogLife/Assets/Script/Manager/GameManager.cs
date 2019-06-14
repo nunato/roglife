@@ -230,7 +230,7 @@ public class GameManager : MonoBehaviour
 			}
 		}
 
-		if( GameSequence == eSequence.MOVE_END ){
+		if( GameSequence == eSequence.ENEMY_MOVE_END ){
 			GameSequence = eSequence.KEY_INPUT;
 		}
 	}

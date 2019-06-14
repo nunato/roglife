@@ -47,6 +47,9 @@ public class Player : MonoBehaviour
 				_StairsManager.IncrementStairsCount();
 			}
 		}
+		else{
+			_GameManager.GameSequence = eSequence.PLAYER_MOVE_END;
+		}
 	}
 
 	private void SetRotation( eDir dir )

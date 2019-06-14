@@ -14,7 +14,7 @@ public class HpBarCtrl : MonoBehaviour
 
     void Update()
     {
-        _hp += 1;
+        //_hp += 1;
         if( _hp > 100 ){
             _hp = 0;
         }

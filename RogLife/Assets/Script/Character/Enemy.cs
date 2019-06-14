@@ -42,6 +42,9 @@ public class Enemy : MonoBehaviour
 			_Move.StartAnime( dir );
 			_GameManager.GameSequence = eSequence.ENEMY_MOVE;
 		}
+		else{
+			_GameManager.GameSequence = eSequence.ENEMY_MOVE_END;
+		}
 	}
 
 	private void SetRotation( eDir dir )
@@ -80,7 +83,7 @@ public class Enemy : MonoBehaviour
 			bool IsMove =　_Move.UpdatePosition( _Element );
 			// 敵の移動終わったら移動完了
 			if( IsMove == false ){
-				_GameManager.GameSequence = eSequence.MOVE_END;
+				_GameManager.GameSequence = eSequence.ENEMY_MOVE_END;
 			}
 		}
 	}
