@@ -37,12 +37,13 @@ public class MapManager : MonoBehaviour
 	public bool CanMove( Vector3 CurrentPos, eDir dir )
 	{
 		int Panel = getNextPanel( CurrentPos, dir );
-
-		if( Panel == (int)eMapElement.WALL ){
-			return false;
+		/* 移動先が床で生物がいないとき */
+		if( ( Panel & (int)eMapElement.FLOOR ) == (int)eMapElement.FLOOR &&
+			( Panel & (int)eMapElement.ENEMY ) == 0　){
+			return true;
 		}
 		else{
-			return true;
+			return false;
 		}
 	}
 
@@ -51,11 +52,11 @@ public class MapManager : MonoBehaviour
 	{
 		int Panel = getNextPanel( CurrentPos, dir );
 
-		if( Panel != (int)eMapElement.ENEMY ){
-			return false;
+		if( Panel == (int)eMapElement.ENEMY ){
+			return true;
 		}
 		else{
-			return true;
+			return false;
 		}
 	}
 

@@ -4,9 +4,11 @@ using UnityEngine;
 
 public enum eMapElement
 {
-	FLOOR = 1,
-	WALL,
-	STAIRS,
-	PLAYER = 100,
-	ENEMY,
+	FLOOR	= 0x0001,
+	WALL	= 0x0002,
+
+	STAIRS	= 0x0010,
+
+	PLAYER	= 0x0100,
+	ENEMY	= 0x0200,
 }
